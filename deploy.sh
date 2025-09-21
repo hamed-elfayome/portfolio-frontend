@@ -32,22 +32,46 @@ mkdir -p ssl
 # Check if SSL certificates exist
 if [ ! -f "ssl/fullchain.pem" ] || [ ! -f "ssl/privkey.pem" ]; then
     echo -e "${YELLOW}⚠️  SSL certificates not found in ./ssl/ directory${NC}"
-    echo -e "${BLUE}📋 Please ensure you have:${NC}"
-    echo "   - ssl/fullchain.pem"
-    echo "   - ssl/privkey.pem"
-    echo ""
-    echo -e "${BLUE}💡 You can obtain SSL certificates from:${NC}"
-    echo "   - Let's Encrypt (certbot)"
-    echo "   - Cloudflare Origin Certificates"
-    echo "   - Your domain registrar"
-    echo ""
-    read -p "Do you want to continue without SSL? (y/N): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo -e "${RED}❌ Deployment cancelled. Please add SSL certificates and try again.${NC}"
-        exit 1
+    echo -e "${BLUE}🔒 Generating SSL certificates with Certbot...${NC}"
+
+    # Check if certbot is installed
+    if ! command -v certbot &> /dev/null; then
+        echo -e "${BLUE}📦 Installing Certbot...${NC}"
+        if command -v apt-get &> /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y certbot
+        elif command -v yum &> /dev/null; then
+            sudo yum install -y certbot
+        else
+            echo -e "${RED}❌ Cannot install certbot automatically. Please install it manually.${NC}"
+            exit 1
+        fi
     fi
-    echo -e "${YELLOW}⚠️  Continuing without SSL - site will only work on HTTP${NC}"
+
+    # Generate SSL certificate
+    echo -e "${BLUE}🔐 Requesting SSL certificate for hamedelfayome.dev...${NC}"
+    sudo certbot certonly --standalone \
+        --preferred-challenges http \
+        -d hamedelfayome.dev \
+        -d www.hamedelfayome.dev \
+        --non-interactive \
+        --agree-tos \
+        --email admin@hamedelfayome.dev
+
+    # Copy certificates to ssl directory
+    if [ -f "/etc/letsencrypt/live/hamedelfayome.dev/fullchain.pem" ]; then
+        sudo cp /etc/letsencrypt/live/hamedelfayome.dev/fullchain.pem ssl/
+        sudo cp /etc/letsencrypt/live/hamedelfayome.dev/privkey.pem ssl/
+        sudo chown $(whoami):$(whoami) ssl/*.pem
+        echo -e "${GREEN}✅ SSL certificates generated successfully!${NC}"
+    else
+        echo -e "${RED}❌ Failed to generate SSL certificates${NC}"
+        read -p "Continue without SSL? (y/N): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            exit 1
+        fi
+    fi
 fi
 
 # Stop any existing containers
