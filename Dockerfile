@@ -1,14 +1,13 @@
-# Multi-stage build for production
-FROM node:18-alpine AS builder
+# Build stage
+FROM node:18-alpine as build
 
-# Set working directory
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies (including dev dependencies for build)
-RUN npm ci
+# Install dependencies
+RUN npm ci --only=production
 
 # Copy source code
 COPY . .
@@ -16,27 +15,17 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Clean up dev dependencies to reduce image size
-RUN npm prune --production
-
-# Production stage with Nginx
+# Production stage
 FROM nginx:alpine
 
-# Copy built files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy built assets from build stage
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom nginx configuration
+# Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy SSL certificates (if available)
-# COPY ssl/ /etc/nginx/ssl/
-
-# Expose port 80 and 443
-EXPOSE 80 443
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost/ || exit 1
+# Expose port 80
+EXPOSE 80
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

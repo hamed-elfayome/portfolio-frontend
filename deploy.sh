@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Portfolio Deployment Script
-# One-click deployment for hamedelfayome.dev
+# Portfolio Site One-Click Deployment Script
+# Domain: hamedelfayome.dev
 
 set -e
 
-echo "🚀 Starting Portfolio Deployment..."
+echo "🚀 Starting portfolio site deployment..."
 
 # Colors for output
 RED='\033[0;31m'
@@ -14,98 +14,73 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Configuration
-DOMAIN="hamedelfayome.dev"
-CONTAINER_NAME="hamed-elfayome-portfolio"
-IMAGE_NAME="hamed-elfayome-portfolio"
-
-# Function to print colored output
-print_status() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
-
-print_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
-
-print_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
-}
-
-print_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
-}
-
 # Check if Docker is installed
 if ! command -v docker &> /dev/null; then
-    print_error "Docker is not installed. Please install Docker first."
+    echo -e "${RED}❌ Docker is not installed. Please install Docker first.${NC}"
     exit 1
 fi
 
 # Check if Docker Compose is installed
 if ! command -v docker-compose &> /dev/null; then
-    print_error "Docker Compose is not installed. Please install Docker Compose first."
+    echo -e "${RED}❌ Docker Compose is not installed. Please install Docker Compose first.${NC}"
     exit 1
 fi
 
-print_status "Docker and Docker Compose are available"
+# Create SSL directory if it doesn't exist
+mkdir -p ssl
 
-# Stop and remove existing container if it exists
-if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
-    print_status "Stopping existing container..."
-    docker stop $CONTAINER_NAME || true
-    docker rm $CONTAINER_NAME || true
-    print_success "Existing container removed"
+# Check if SSL certificates exist
+if [ ! -f "ssl/fullchain.pem" ] || [ ! -f "ssl/privkey.pem" ]; then
+    echo -e "${YELLOW}⚠️  SSL certificates not found in ./ssl/ directory${NC}"
+    echo -e "${BLUE}📋 Please ensure you have:${NC}"
+    echo "   - ssl/fullchain.pem"
+    echo "   - ssl/privkey.pem"
+    echo ""
+    echo -e "${BLUE}💡 You can obtain SSL certificates from:${NC}"
+    echo "   - Let's Encrypt (certbot)"
+    echo "   - Cloudflare Origin Certificates"
+    echo "   - Your domain registrar"
+    echo ""
+    read -p "Do you want to continue without SSL? (y/N): " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo -e "${RED}❌ Deployment cancelled. Please add SSL certificates and try again.${NC}"
+        exit 1
+    fi
+    echo -e "${YELLOW}⚠️  Continuing without SSL - site will only work on HTTP${NC}"
 fi
 
-# Remove existing image if it exists
-if [ "$(docker images -q $IMAGE_NAME)" ]; then
-    print_status "Removing existing image..."
-    docker rmi $IMAGE_NAME || true
-    print_success "Existing image removed"
-fi
+# Stop any existing containers
+echo -e "${BLUE}🛑 Stopping existing containers...${NC}"
+docker-compose down 2>/dev/null || true
 
-# Build the Docker image
-print_status "Building Docker image..."
-docker-compose build --no-cache
+# Build and start the application
+echo -e "${BLUE}🔨 Building Docker image...${NC}"
+docker-compose build
 
-# Start the container
-print_status "Starting portfolio container..."
+echo -e "${BLUE}🌐 Starting portfolio site...${NC}"
 docker-compose up -d
 
 # Wait for container to be ready
-print_status "Waiting for container to be ready..."
-sleep 10
+echo -e "${BLUE}⏳ Waiting for container to be ready...${NC}"
+sleep 5
 
 # Check if container is running
-if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-    print_success "Portfolio is running successfully!"
-    
-    # Display container information
+if docker-compose ps | grep -q "Up"; then
+    echo -e "${GREEN}✅ Portfolio site deployed successfully!${NC}"
     echo ""
-    print_status "Container Information:"
-    docker ps -f name=$CONTAINER_NAME --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-    
+    echo -e "${GREEN}🌐 Your site is now available at:${NC}"
+    if [ -f "ssl/fullchain.pem" ] && [ -f "ssl/privkey.pem" ]; then
+        echo -e "${GREEN}   • https://hamedelfayome.dev${NC}"
+        echo -e "${GREEN}   • http://hamedelfayome.dev (redirects to HTTPS)${NC}"
+    else
+        echo -e "${YELLOW}   • http://localhost (HTTP only - no SSL)${NC}"
+    fi
     echo ""
-    print_status "Portfolio URLs:"
-    echo "  🌐 HTTP:  http://$DOMAIN"
-    echo "  🔒 HTTPS: https://$DOMAIN"
-    echo "  🏥 Health: http://$DOMAIN/health"
-    
-    echo ""
-    print_status "Useful Commands:"
-    echo "  📊 View logs:    docker-compose logs -f"
-    echo "  🛑 Stop:         docker-compose down"
-    echo "  🔄 Restart:      docker-compose restart"
-    echo "  📋 Status:       docker-compose ps"
-    
-    echo ""
-    print_warning "Note: SSL certificates need to be configured for HTTPS"
-    print_warning "Run: ./setup-ssl.sh to configure Let's Encrypt SSL"
-    
+    echo -e "${BLUE}📊 To view logs: docker-compose logs -f${NC}"
+    echo -e "${BLUE}🛑 To stop: docker-compose down${NC}"
+    echo -e "${BLUE}🔄 To restart: docker-compose restart${NC}"
 else
-    print_error "Failed to start container. Check logs with: docker-compose logs"
+    echo -e "${RED}❌ Deployment failed. Check logs with: docker-compose logs${NC}"
     exit 1
 fi
-
-print_success "Deployment completed! 🎉"
