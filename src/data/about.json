@@ -1,0 +1,16 @@
+{
+  "paragraphs": [
+    {
+      "text": "I'm a passionate Software Engineer who loves turning complex problems into elegant solutions. I've helped companies reduce costs by 80%, deliver projects 95% faster, and build systems that serve thousands of users worldwide.",
+      "highlightedWords": ["Software Engineer", "elegant solutions"]
+    },
+    {
+      "text": "Right now, I'm building amazing Shopify applications using modern web technologies. I use AI tools to work smarter, not harder, and I can build big features in just 2 days.",
+      "highlightedWords": ["AI tools"]
+    },
+    {
+      "text": "I work with Laravel, React, Vue.js, Python, and Node.js. I also handle DevOps, automation, and AI integration. My goal is always to create solutions that make a real difference for businesses.",
+      "highlightedWords": ["Laravel", "Python", "DevOps", "AI integration"]
+    }
+  ]
+}

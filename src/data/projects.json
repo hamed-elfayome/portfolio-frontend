@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "SERVER SETUP AUTOMATION",
+    "summary": "Comprehensive automation toolkit for VPS server setup. Reduced server provisioning time from hours to 2 minutes with automated Laravel, Vue.js, and Next.js deployment.",
+    "description": "Comprehensive automation toolkit for VPS server setup with multi-framework deployment. Features automated Laravel, Vue.js, and Next.js project creation with database setup. Implemented SSL management with Let's Encrypt and GitHub Actions CI/CD. Reduced server provisioning time from hours to 2 minutes through automation. Built secure configurations including SSH hardening, firewall setup, and backup systems. Created production-ready infrastructure with monitoring, logging, and recovery capabilities.",
+    "technologies": ["Bash Scripting", "Nginx", "Let's Encrypt", "GitHub Actions", "UFW", "MySQL", "PM2", "Docker"],
+    "githubUrl": "https://github.com/hamed-elfayome/Server-setup-automation",
+    "liveUrl": "#",
+    "image": null,
+    "githubStars": 0,
+    "featured": true,
+    "card": {
+      "type": "DevOps",
+      "icon": "server",
+      "title": "SERVER SETUP",
+      "tech": "Bash Scripting / Nginx / Let's Encrypt"
+    }
+  },
+  {
+    "id": 2,
+    "title": "BACKUP SYSTEM",
+    "summary": "Enterprise-grade backup solution for Bunny.net Storage Zones with automated daily backups, health monitoring, and Telegram notifications.",
+    "description": "Built enterprise-grade backup solution for Bunny.net Storage Zones with automated daily backups. Developed interactive restore utility with progress tracking and user-friendly interface. Implemented comprehensive system health monitoring with disk health tracking and alerts. Created parallel processing system for faster backup operations and efficient resource utilization. Integrated Telegram notifications for backup status, system alerts, and health reports. Built SQLite database tracking for backup history, metadata, and restore operations.",
+    "technologies": ["Python", "Bunny.net API", "Telegram Bot", "SQLite", "SSH", "Disk Health Monitoring", "Parallel Processing"],
+    "githubUrl": "https://github.com/hamed-elfayome/Backup-System",
+    "liveUrl": "#",
+    "image": null,
+    "githubStars": 0,
+    "featured": true,
+    "card": {
+      "type": "System",
+      "icon": "database",
+      "title": "BACKUP SYSTEM",
+      "tech": "Python / Bunny.net API / Telegram Bot"
+    }
+  },
+  {
+    "id": 3,
+    "title": "WPPCONNECT LITE SERVER",
+    "summary": "WhatsApp API server built in one day using Node.js and Express. Created RESTful API endpoints for WhatsApp message automation with AI assistance.",
+    "description": "Built WhatsApp API server using Node.js and Express. Developed complete project in one day using Claude AI assistance. Created RESTful API endpoints for WhatsApp message automation. Implemented lite version of WppConnect for simplified integration. Demonstrated rapid learning ability with zero prior Node.js experience. Showcased AI-powered development methodology for accelerated delivery.",
+    "technologies": ["Node.js", "Express.js", "WppConnect", "RESTful API", "Claude AI"],
+    "githubUrl": "https://github.com/hamed-elfayome/wppconnect-lite-server",
+    "liveUrl": "#",
+    "image": null,
+    "githubStars": 0,
+    "featured": true,
+    "card": {
+      "type": "API",
+      "icon": "api",
+      "title": "WPPCONNECT LITE",
+      "tech": "Node.js / Express.js / WppConnect"
+    }
+  },
+  {
+    "id": 4,
+    "title": "CAIRO COIN",
+    "summary": "Web application for Egypt's parallel currency markets with 6-month research, 10+ data sources, and React Native mobile apps.",
+    "description": "Engineered web application for Egypt's parallel currency markets. Conducted 6-month market research for domain expertise. Aggregated data from 10+ sources improving accuracy by 25%. Built dual-interface system with API management and visualizations. Developed secure Django RESTful API with token-based access. Created React Native mobile apps with dynamic loading. Integrated automation reducing server usage by 20%.",
+    "technologies": ["Django REST", "React Native", "Bootstrap", "Google Apps Script", "Python"],
+    "githubUrl": "https://github.com/hamed-elfayome/Cairo-Coin",
+    "liveUrl": "#",
+    "image": null,
+    "githubStars": 0,
+    "featured": true,
+    "card": {
+      "type": "Web App",
+      "icon": "analysis",
+      "title": "CAIRO COIN",
+      "tech": "Django REST / React Native / Bootstrap"
+    }
+  },
+  {
+    "id": 5,
+    "title": "DATA EXTRACTORS SUITE",
+    "summary": "Comprehensive data extraction solutions combining OCR, GUI automation, and web scraping. Reduced data extraction time by 96.3% and scraped 70,000+ books.",
+    "description": "Built comprehensive data extraction solutions combining OCR, GUI automation, and web scraping. Developed desktop apps with 3 OCR engines for text extraction benchmarking. Created GUI automation tools reducing data extraction time by 96.3%. Scraped 70,000+ books and 18,000+ medicine entries using Python automation. Implemented window controls with pywinauto and win32gui for desktop automation. Built scalable web scraping pipelines for large-scale information extraction.",
+    "technologies": ["Python", "pywinauto", "win32gui", "BeautifulSoup", "OCR Engines", "Web Scraping"],
+    "githubUrl": "https://github.com/hamed-elfayome/Windows-App-Data-Extractor",
+    "liveUrl": "#",
+    "image": null,
+    "githubStars": 0,
+    "featured": true,
+    "card": {
+      "type": "Automation",
+      "icon": "robot",
+      "title": "DATA EXTRACTORS",
+      "tech": "Python / pywinauto / BeautifulSoup"
+    }
+  }
+]

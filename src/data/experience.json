@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "company": "XTND",
+    "position": "Software Engineer",
+    "period": "July 2025 — Present",
+    "summary": "Developing comprehensive Shopify Cash on Delivery app using Laravel + React SPA. Improved navigation speed by 90% and delivered large-scale features in 2-day cycles.",
+    "description": "Developing comprehensive Shopify Cash on Delivery app using Laravel + React SPA architecture. Restructured application improving navigation speed by 90%. Delivered multi-layer features across complete Shopify ecosystem. Built high-performance microservices including native PHP short-link redirect service. Leveraged AI-powered development (Cursor + MCPs) for enhanced productivity. Delivered large-scale features (2,500+ lines per feature) with 2-day cycles.",
+    "technologies": ["Laravel", "React SPA", "PHP Microservices", "MySQL", "Shopify APIs", "GraphQL", "AI Tools"],
+    "companyUrl": "#",
+    "logo": null
+  },
+  {
+    "id": 2,
+    "company": "MONGLISH",
+    "position": "Full-Stack Engineer",
+    "period": "June 2024 — June 2025",
+    "summary": "Delivered 10+ digital solutions, reduced delivery time by 95%, and designed infrastructure serving 10,000+ students. Cut server costs by 80% while improving performance.",
+    "description": "Delivered 10+ end-to-end digital solutions accelerating organizational transformation. Reduced project delivery time by 95% (discussion to production in 2 days). Built Placement Test System serving multiple departments. Designed infrastructure serving 10,000+ students worldwide. Migrated server infrastructure reducing costs by 80% ($200→$40/month). Improved system performance by 35% while cutting costs. Created automated deployment pipeline with zero-touch deployments. Implemented automated backup system (8TB) with one-click restore.",
+    "technologies": ["Laravel", "Vue.js", "React", "Next.js SSR", "PHP", "MySQL", "GitHub Actions", "Python", "Hetzner VPS"],
+    "companyUrl": "#",
+    "logo": null
+  },
+  {
+    "id": 3,
+    "company": "WORDREWARD",
+    "position": "Backend Developer",
+    "period": "Oct 2024 — Feb 2025",
+    "summary": "Developed backend and admin dashboard for white-label platform with reservations, loyalty programs, and e-commerce functionality.",
+    "description": "Developed backend and admin dashboard for white-label platform. Integrated reservations, loyalty programs, and e-commerce functionality. Managed full project lifecycle from requirements to deployment. Collaborated with design teams ensuring product consistency.",
+    "technologies": ["Laravel", "MySQL", "RESTful APIs", "Admin Dashboards", "Figma Integration"],
+    "companyUrl": "#",
+    "logo": null
+  }
+]
