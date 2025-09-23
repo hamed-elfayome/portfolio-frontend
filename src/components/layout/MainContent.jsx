@@ -1,6 +1,7 @@
 import About from '../sections/About';
 import Experience from '../sections/Experience';
 import Projects from '../sections/Projects';
+import GitHub from '../sections/GitHub';
 import Contact from '../sections/Contact';
 
 const MainContent = () => {
@@ -9,6 +10,7 @@ const MainContent = () => {
       <About />
       <Experience />
       <Projects />
+      <GitHub />
       <Contact />
     </main>
   );

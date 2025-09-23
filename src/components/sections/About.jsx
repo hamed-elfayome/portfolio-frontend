@@ -1,6 +1,6 @@
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import aboutData from '../../data/about.json';
-import HighlightedText from '../ui/HighlightedText';
+import HighlightedText from '../common/HighlightedText';
 
 const About = () => {
   const [ref, isIntersecting] = useIntersectionObserver();

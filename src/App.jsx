@@ -1,6 +1,4 @@
-import Sidebar from './components/layout/Sidebar';
-import MainContent from './components/layout/MainContent';
-import MouseFollower from './components/ui/MouseFollower';
+import { Sidebar, MainContent, MouseFollower } from './components';
 
 function App() {
   return (

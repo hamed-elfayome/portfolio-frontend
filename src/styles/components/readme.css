@@ -1,0 +1,466 @@
+/**
+ * README Content Styling
+ * Compact, comprehensive markdown styling for GitHub README display
+ */
+
+/* README content styling - Compact */
+.readme-content {
+  @apply text-slate-300;
+  line-height: 1.5;
+  font-size: 13px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Headers - Compact hierarchy */
+.readme-content h1 {
+  @apply text-lg font-bold text-slate-100 mt-4 mb-3 pb-2;
+  border-bottom: 1px solid #334155;
+  scroll-margin-top: 1rem;
+}
+
+.readme-content h2 {
+  @apply text-base font-semibold text-slate-200 mt-4 mb-3;
+  scroll-margin-top: 1rem;
+  position: relative;
+}
+
+.readme-content h2::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 14px;
+  background: #0891b2;
+  border-radius: 1px;
+}
+
+.readme-content h3 {
+  @apply text-sm font-semibold text-slate-200 mt-3 mb-2;
+  scroll-margin-top: 1rem;
+}
+
+.readme-content h4 {
+  @apply text-sm font-medium text-slate-300 mt-3 mb-2;
+  scroll-margin-top: 1rem;
+}
+
+.readme-content h5,
+.readme-content h6 {
+  @apply text-xs font-medium text-slate-300 mt-2 mb-2;
+  scroll-margin-top: 1rem;
+}
+
+/* Paragraphs - Compact spacing */
+.readme-content p {
+  @apply mb-3 text-slate-300;
+  margin-top: 0;
+  line-height: 1.4;
+}
+
+.readme-content p:first-child {
+  @apply mt-0;
+}
+
+.readme-content p:last-child {
+  @apply mb-0;
+}
+
+.readme-content p:empty {
+  @apply mb-2;
+}
+
+/* Text formatting */
+.readme-content strong {
+  @apply font-semibold text-slate-100;
+}
+
+.readme-content em {
+  @apply italic text-slate-300;
+}
+
+/* Emoji styling - prevent spacing issues */
+.readme-content .emoji {
+  display: inline;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-emoji: emoji;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* Inline code - compact styling */
+.readme-content code {
+  @apply bg-slate-800/80 text-teal-300 px-1.5 py-0.5 rounded text-xs font-mono;
+  border: 1px solid #475569;
+  font-weight: 500;
+}
+
+/* Code blocks - compact styling */
+.readme-content pre {
+  @apply bg-slate-800 rounded p-3 my-3 overflow-x-auto;
+  border: 1px solid #475569;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-wrap: normal;
+}
+
+.readme-content pre code {
+  @apply bg-transparent border-0 p-0 text-slate-300 font-mono;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 400;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Code block container specific styling */
+.readme-content .code-block-container {
+  @apply my-4;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.readme-content .code-block-container pre {
+  @apply m-0;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.readme-content .code-block-container .code-block-header {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+/* Links with better hover effects */
+.readme-content a {
+  @apply text-teal-300 hover:text-teal-200 underline underline-offset-2 transition-all duration-200;
+  text-decoration-thickness: 1px;
+}
+
+.readme-content a:hover {
+  @apply text-teal-200;
+  text-decoration-thickness: 2px;
+}
+
+/* Internal scroll links */
+.readme-content a.scroll-link {
+  @apply text-blue-400 hover:text-blue-300;
+  cursor: pointer;
+}
+
+.readme-content a.internal-link {
+  @apply text-purple-400 hover:text-purple-300;
+}
+
+/* Anchor link hover effect */
+.readme-content h1:hover::after,
+.readme-content h2:hover::after,
+.readme-content h3:hover::after,
+.readme-content h4:hover::after,
+.readme-content h5:hover::after,
+.readme-content h6:hover::after {
+  content: "#";
+  @apply text-slate-500 ml-2 opacity-75;
+  font-weight: normal;
+}
+
+/* Lists - Compact spacing */
+.readme-content ul,
+.readme-content ol {
+  @apply mb-3 pl-4;
+  margin-top: 0;
+}
+
+.readme-content ul {
+  list-style-type: disc;
+}
+
+.readme-content ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.readme-content li {
+  @apply mb-1 text-slate-300;
+  padding-left: 0.25rem;
+  line-height: 1.4;
+}
+
+.readme-content li p {
+  @apply mb-1;
+}
+
+.readme-content ul li::marker {
+  @apply text-teal-400;
+}
+
+.readme-content ol li::marker {
+  @apply text-teal-400 font-medium;
+}
+
+/* Nested lists - Compact */
+.readme-content ul ul,
+.readme-content ol ul,
+.readme-content ul ol,
+.readme-content ol ol {
+  @apply mt-1 mb-1 pl-3;
+}
+
+.readme-content ul ul {
+  list-style-type: circle;
+}
+
+.readme-content ul ul ul {
+  list-style-type: square;
+}
+
+/* Blockquotes - Compact styling */
+.readme-content blockquote {
+  @apply border-l-2 border-teal-500 pl-3 italic text-slate-300 my-3 py-2;
+  background: linear-gradient(90deg, rgba(8, 145, 178, 0.1) 0%, transparent 100%);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  font-size: 0.875rem;
+}
+
+.readme-content blockquote p {
+  @apply mb-2 last:mb-0;
+}
+
+.readme-content blockquote::before {
+  content: "\201C";
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  font-size: 1.25rem;
+  color: #0891b2;
+  opacity: 0.5;
+  font-family: serif;
+}
+
+/* Tables - Compact styling */
+.readme-content table {
+  @apply w-full border-collapse my-3 rounded overflow-hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.75rem;
+}
+
+.readme-content th,
+.readme-content td {
+  @apply px-2 py-1.5 text-left border-b border-slate-600;
+}
+
+.readme-content th {
+  @apply bg-slate-800 font-medium text-slate-200;
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.readme-content td {
+  @apply bg-slate-900/30 text-slate-300;
+}
+
+.readme-content tr:hover td {
+  @apply bg-slate-800/50;
+}
+
+/* Images - Compact presentation */
+.readme-content img {
+  @apply max-w-full h-auto rounded my-3;
+  border: 1px solid #475569;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  object-fit: cover;
+}
+
+/* Horizontal rules - Compact */
+.readme-content hr {
+  @apply border-0 my-4;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #475569, transparent);
+}
+
+/* Strikethrough text */
+.readme-content del {
+  @apply text-slate-500 opacity-75;
+}
+
+/* Task lists (GitHub flavored markdown) */
+.readme-content input[type="checkbox"] {
+  @apply mr-2 accent-teal-500;
+}
+
+.readme-content .task-list-item {
+  @apply list-none;
+  margin-left: -1rem;
+}
+
+/* Keyboard keys - Compact */
+.readme-content kbd {
+  @apply bg-slate-700 text-slate-200 px-1 py-0.5 rounded text-xs font-mono border border-slate-600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Definition lists - Compact */
+.readme-content dt {
+  @apply font-medium text-slate-200 mt-2;
+  font-size: 0.875rem;
+}
+
+.readme-content dd {
+  @apply ml-3 mb-2 text-slate-300;
+  font-size: 0.8rem;
+}
+
+/* Additional markdown elements */
+.readme-content mark {
+  @apply bg-yellow-400/20 text-yellow-200 px-1 rounded;
+}
+
+.readme-content sub,
+.readme-content sup {
+  font-size: 0.7rem;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.readme-content sup {
+  top: -0.5em;
+}
+
+.readme-content sub {
+  bottom: -0.25em;
+}
+
+/* GitHub-style alerts/callouts */
+.readme-content .markdown-alert {
+  @apply border-l-4 pl-4 py-3 my-4 rounded-r;
+  font-size: 0.875rem;
+}
+
+.readme-content .markdown-alert-note {
+  @apply border-blue-500 bg-blue-500/10 text-blue-200;
+}
+
+.readme-content .markdown-alert-tip {
+  @apply border-green-500 bg-green-500/10 text-green-200;
+}
+
+.readme-content .markdown-alert-important {
+  @apply border-purple-500 bg-purple-500/10 text-purple-200;
+}
+
+.readme-content .markdown-alert-warning {
+  @apply border-yellow-500 bg-yellow-500/10 text-yellow-200;
+}
+
+.readme-content .markdown-alert-caution {
+  @apply border-red-500 bg-red-500/10 text-red-200;
+}
+
+/* Code spans in headings */
+.readme-content h1 code,
+.readme-content h2 code,
+.readme-content h3 code,
+.readme-content h4 code,
+.readme-content h5 code,
+.readme-content h6 code {
+  @apply bg-slate-700/50 text-cyan-300 px-1 py-0.5 rounded;
+  font-size: 0.85em;
+}
+
+/* Footnote references */
+.readme-content .footnote-ref {
+  @apply text-xs align-super text-blue-400 hover:text-blue-300 no-underline;
+}
+
+/* Details/Summary */
+.readme-content details {
+  @apply border border-slate-700 rounded my-3 p-3;
+}
+
+.readme-content summary {
+  @apply cursor-pointer font-medium text-slate-200 mb-2;
+  font-size: 0.875rem;
+}
+
+.readme-content details[open] summary {
+  @apply mb-3 pb-2 border-b border-slate-700;
+}
+
+/* Mermaid diagrams - Compact and clean */
+.mermaid-wrapper {
+  @apply my-3 overflow-x-auto;
+}
+
+.mermaid {
+  @apply text-center p-3 bg-slate-800/30 rounded border border-slate-700/50;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.mermaid svg {
+  @apply max-w-full h-auto;
+  background: transparent !important;
+}
+
+/* Responsive improvements - Compact mobile */
+@media (max-width: 768px) {
+  .readme-content {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .readme-content h1 {
+    @apply text-base;
+  }
+
+  .readme-content h2 {
+    @apply text-sm;
+  }
+
+  .readme-content h3 {
+    @apply text-sm;
+  }
+
+  .readme-content pre {
+    @apply p-2;
+    font-size: 0.7rem;
+  }
+
+  .readme-content table {
+    font-size: 0.7rem;
+  }
+
+  .readme-content th,
+  .readme-content td {
+    @apply px-1.5 py-1;
+  }
+
+  .readme-content blockquote {
+    @apply pl-2 py-1 my-2;
+  }
+
+  .readme-content ul,
+  .readme-content ol {
+    @apply pl-3;
+  }
+}
