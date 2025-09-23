@@ -15,7 +15,12 @@ const GitHub = () => {
           setRepos(data);
         }
       } catch (error) {
-        console.warn('Failed to fetch repos:', error);
+        if (error.message?.includes('Content Security Policy') || error.name === 'TypeError') {
+          console.warn('GitHub API blocked by CSP, using fallback data');
+          // You could set some fallback repos here if needed
+        } else {
+          console.warn('Failed to fetch repos:', error);
+        }
       } finally {
         setLoading(false);
       }

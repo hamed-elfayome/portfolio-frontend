@@ -4,6 +4,7 @@
  */
 
 import { API_CONFIG, GITHUB_ENDPOINTS, HTTP_STATUS, CACHE_KEYS } from '../constants/api.js';
+import { fetchGitHubData, isCSPError } from '../utils/csp-safe-fetch.js';
 
 // Simple in-memory cache
 const cache = new Map();
@@ -37,21 +38,14 @@ export const parseGitHubUrl = (githubUrl) => {
  * @returns {Promise<Object>} - API response
  */
 const makeGitHubRequest = async (endpoint) => {
-  const url = `${API_CONFIG.GITHUB_API_BASE}${endpoint}`;
-
-  const response = await fetch(url, {
-    headers: {
-      'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': API_CONFIG.USER_AGENT
-    },
-    timeout: API_CONFIG.REQUEST_TIMEOUT
-  });
-
-  if (!response.ok) {
-    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+  try {
+    return await fetchGitHubData(endpoint);
+  } catch (error) {
+    if (isCSPError(error)) {
+      throw new Error('Network error: Unable to connect to GitHub API. This may be due to Content Security Policy restrictions.');
+    }
+    throw error;
   }
-
-  return response.json();
 };
 
 /**

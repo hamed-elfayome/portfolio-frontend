@@ -317,17 +317,30 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
         const htmlContent = convertMarkdownToHtml(readme.value);
         setReadmeContent(htmlContent);
       } else {
-        console.warn('README fetch failed:', readme.reason);
+        const error = readme.reason;
+        if (error?.message?.includes('Content Security Policy')) {
+          console.warn('GitHub API blocked by CSP, skipping README fetch');
+        } else {
+          console.warn('README fetch failed:', error);
+        }
       }
 
       if (repo.status === 'fulfilled') {
         setRepoInfo(repo.value);
       } else {
-        console.warn('Repository info fetch failed:', repo.reason);
+        const error = repo.reason;
+        if (error?.message?.includes('Content Security Policy')) {
+          console.warn('GitHub API blocked by CSP, skipping repo info fetch');
+        } else {
+          console.warn('Repository info fetch failed:', error);
+        }
       }
 
-      // If both failed, show error
-      if (readme.status === 'rejected' && repo.status === 'rejected') {
+      // Only show error if it's not a CSP issue
+      const isCSPError = (readme.status === 'rejected' && readme.reason?.message?.includes('Content Security Policy')) ||
+                        (repo.status === 'rejected' && repo.reason?.message?.includes('Content Security Policy'));
+      
+      if (readme.status === 'rejected' && repo.status === 'rejected' && !isCSPError) {
         setError('Failed to load project details from GitHub');
       }
 
