@@ -127,7 +127,7 @@ const GitHub = () => {
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                     <span className="font-mono text-xs text-slate-400">
-                      {userStats.publicRepos} repos/yr
+                      {userStats.publicRepos} repos
                     </span>
                   </div>
                 )}
@@ -135,7 +135,7 @@ const GitHub = () => {
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                     <span className="font-mono text-xs text-slate-400">
-                      {userStats.totalContributions} commits/yr
+                      {userStats.totalContributions} commits
                     </span>
                   </div>
                 )}
@@ -143,10 +143,11 @@ const GitHub = () => {
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
                     <span className="font-mono text-xs text-slate-400">
-                      {userStats.languages} langs/yr
+                      {userStats.languages} langs
                     </span>
                   </div>
                 )}
+                <span className="font-mono text-xs text-slate-600">/year</span>
               </>
             ) : (
               <span className="text-xs text-slate-500 font-mono">connection failed</span>
