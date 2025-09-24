@@ -22,10 +22,10 @@ const Experience = () => {
     <section 
       id="experience" 
       ref={ref}
-      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+      className="snap-section"
       aria-label="Work experience"
     >
-      <div className={`transition-all duration-1000 delay-400 ${
+      <div className={`w-full max-w-4xl mx-auto transition-all duration-1000 delay-400 ${
         isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
         <ol className="group/list">

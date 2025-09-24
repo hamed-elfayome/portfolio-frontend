@@ -9,16 +9,48 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-slate-900 text-slate-400 font-sans antialiased;
     margin: 0;
     min-height: 100vh;
   }
+
+  /* Snap scroll only on desktop */
+  @media (min-width: 1024px) {
+    html {
+      scroll-snap-type: y mandatory;
+    }
+  }
 }
 
 
 @layer components {
+  /* Sections with responsive behavior */
+  .snap-section {
+    padding-block: 2rem;
+    overflow-y: visible;
+  }
+
+  @media (min-width: 768px) {
+    .snap-section {
+      padding-block: 3rem;
+    }
+  }
+
+  /* Full-height snap scroll only on desktop */
+  @media (min-width: 1024px) {
+    .snap-section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding-block: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-type: none;
+    }
+  }
+
   /* Navigation styles */
   .nav-indicator {
     @apply transition-all duration-300;

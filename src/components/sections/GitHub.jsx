@@ -78,9 +78,10 @@ const GitHub = () => {
   }, [githubUsername]);
 
   return (
-    <section id="github" className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
-      {/* Terminal-style Header */}
-      <div className="mb-8">
+    <section id="github" className="snap-section">
+      <div className="w-full max-w-4xl mx-auto">
+        {/* Terminal-style Header */}
+        <div className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           <div className="flex gap-1">
             <div className="w-2 h-2 rounded-full bg-red-500/60"></div>
@@ -110,8 +111,8 @@ const GitHub = () => {
 
       {/* Stats Bar */}
       <div className="mb-8 bg-slate-900/50 rounded-lg border border-slate-700/30 p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
+          <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
             {statsLoading ? (
               <div className="flex gap-6">
                 {[...Array(3)].map((_, i) => (
@@ -126,7 +127,7 @@ const GitHub = () => {
                 {statsConfig.publicRepos.show && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span className="font-mono text-xs text-slate-400">
+                    <span className="font-mono text-xs sm:text-xs text-slate-400">
                       {userStats.publicRepos} repos
                     </span>
                   </div>
@@ -134,7 +135,7 @@ const GitHub = () => {
                 {statsConfig.totalContributions.show && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="font-mono text-xs text-slate-400">
+                    <span className="font-mono text-xs sm:text-xs text-slate-400">
                       {userStats.totalContributions} commits
                     </span>
                   </div>
@@ -142,7 +143,7 @@ const GitHub = () => {
                 {statsConfig.languages.show && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    <span className="font-mono text-xs text-slate-400">
+                    <span className="font-mono text-xs sm:text-xs text-slate-400">
                       {userStats.languages} langs
                     </span>
                   </div>
@@ -157,7 +158,7 @@ const GitHub = () => {
             href={`https://github.com/${githubUsername}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-xs text-slate-500 hover:text-slate-300 transition-colors"
+            className="font-mono text-xs text-slate-500 hover:text-slate-300 transition-colors self-start sm:self-auto"
           >
             @{githubUsername}
           </a>
@@ -226,6 +227,7 @@ const GitHub = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </section>
   );

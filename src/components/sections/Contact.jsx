@@ -8,10 +8,10 @@ const Contact = () => {
     <section 
       id="contact" 
       ref={ref}
-      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+      className="snap-section"
       aria-label="Contact"
     >
-      <div className={`transition-all duration-1000 delay-800 ${
+      <div className={`w-full max-w-4xl mx-auto transition-all duration-1000 delay-800 ${
         isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
         <h2 className="text-2xl font-semibold text-slate-200 mb-6">{contactData.title}</h2>

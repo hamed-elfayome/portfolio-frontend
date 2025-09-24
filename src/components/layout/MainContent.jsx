@@ -6,7 +6,7 @@ import Contact from '../sections/Contact';
 
 const MainContent = () => {
   return (
-    <main id="content" className="pt-24 lg:w-[52%] lg:py-24">
+    <main id="content" className="lg:w-[52%] max-w-none">
       <About />
       <Experience />
       <Projects />

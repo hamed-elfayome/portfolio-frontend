@@ -39,30 +39,67 @@ const GitHubContributionMap = ({ username, className = "" }) => {
     const contributions = data.contributions;
     const weeks = Math.ceil(contributions.length / 7);
 
-    let svg = `<svg width="100%" height="auto" viewBox="0 0 ${weeks * 13 + 20} 112" preserveAspectRatio="xMinYMin meet" style="background: transparent;">
-      <g transform="translate(10, 20)">`;
+    // Check if we're on mobile (this is a rough approximation)
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-    contributions.forEach((contribution, index) => {
-      const week = Math.floor(index / 7);
-      const day = index % 7;
-      const x = week * 13;
-      const y = day * 13;
+    if (isMobile) {
+      // Mobile: Create a very compact layout - use original layout but much smaller
+      const squareSize = 2;
+      const gap = 1;
+      const totalWidth = weeks * (squareSize + gap);
+      const totalHeight = 7 * (squareSize + gap);
 
-      // Map contribution count to color intensity
-      let color = '#0f172a'; // No contributions
-      if (contribution.count > 0) color = '#0d4d3c'; // 1+ contributions
-      if (contribution.count >= 2) color = '#065f46'; // 2+ contributions
-      if (contribution.count >= 4) color = '#047857'; // 4+ contributions
-      if (contribution.count >= 6) color = '#059669'; // 6+ contributions
-      if (contribution.count >= 10) color = '#10b981'; // 10+ contributions
+      let svg = `<svg width="100%" height="auto" viewBox="0 0 ${totalWidth + 10} ${totalHeight + 10}" preserveAspectRatio="xMinYMin meet" style="background: transparent;">
+        <g transform="translate(5, 5)">`;
 
-      svg += `<rect width="10" height="10" x="${x}" y="${y}" fill="${color}"
-              stroke="#374151" stroke-width="1" rx="2"
-              data-count="${contribution.count}" data-date="${contribution.date}"/>`;
-    });
+      contributions.forEach((contribution, index) => {
+        const week = Math.floor(index / 7);
+        const day = index % 7;
+        const x = week * (squareSize + gap);
+        const y = day * (squareSize + gap);
 
-    svg += `</g></svg>`;
-    return svg;
+        // Map contribution count to color intensity
+        let color = '#0f172a'; // No contributions
+        if (contribution.count > 0) color = '#0d4d3c'; // 1+ contributions
+        if (contribution.count >= 2) color = '#065f46'; // 2+ contributions
+        if (contribution.count >= 4) color = '#047857'; // 4+ contributions
+        if (contribution.count >= 6) color = '#059669'; // 6+ contributions
+        if (contribution.count >= 10) color = '#10b981'; // 10+ contributions
+
+        svg += `<rect width="${squareSize}" height="${squareSize}" x="${x}" y="${y}" fill="${color}"
+                stroke="#374151" stroke-width="0.2" rx="0.3"
+                data-count="${contribution.count}" data-date="${contribution.date}"/>`;
+      });
+
+      svg += `</g></svg>`;
+      return svg;
+    } else {
+      // Desktop: Keep original horizontal layout
+      let svg = `<svg width="100%" height="auto" viewBox="0 0 ${weeks * 13 + 20} 112" preserveAspectRatio="xMinYMin meet" style="background: transparent;">
+        <g transform="translate(10, 20)">`;
+
+      contributions.forEach((contribution, index) => {
+        const week = Math.floor(index / 7);
+        const day = index % 7;
+        const x = week * 13;
+        const y = day * 13;
+
+        // Map contribution count to color intensity
+        let color = '#0f172a'; // No contributions
+        if (contribution.count > 0) color = '#0d4d3c'; // 1+ contributions
+        if (contribution.count >= 2) color = '#065f46'; // 2+ contributions
+        if (contribution.count >= 4) color = '#047857'; // 4+ contributions
+        if (contribution.count >= 6) color = '#059669'; // 6+ contributions
+        if (contribution.count >= 10) color = '#10b981'; // 10+ contributions
+
+        svg += `<rect width="10" height="10" x="${x}" y="${y}" fill="${color}"
+                stroke="#374151" stroke-width="1" rx="2"
+                data-count="${contribution.count}" data-date="${contribution.date}"/>`;
+      });
+
+      svg += `</g></svg>`;
+      return svg;
+    }
   };
 
   if (loading) {
@@ -100,9 +137,9 @@ const GitHubContributionMap = ({ username, className = "" }) => {
   }
 
   return (
-    <div className="overflow-x-auto overflow-y-hidden">
+    <div className="overflow-y-hidden">
       <div
-        className="contribution-map min-w-[680px] md:min-w-0"
+        className="contribution-map w-full"
         dangerouslySetInnerHTML={{ __html: contributions }}
       />
     </div>

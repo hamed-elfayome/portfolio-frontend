@@ -23,10 +23,10 @@ const Projects = () => {
     <section 
       id="projects" 
       ref={ref}
-      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+      className="snap-section"
       aria-label="Selected projects"
     >
-      <div className={`transition-all duration-1000 delay-600 ${
+      <div className={`w-full max-w-4xl mx-auto transition-all duration-1000 delay-600 ${
         isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
         <ul className="group/list">
