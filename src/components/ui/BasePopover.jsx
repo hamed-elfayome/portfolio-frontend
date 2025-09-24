@@ -1,16 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 const BasePopover = ({
   isOpen,
   onClose,
   title,
+  headerContent,
   children,
   maxWidth = "md:max-w-3xl",
   showBackButton = true,
   showCloseButton = true
 }) => {
   const [isClosing, setIsClosing] = useState(false);
-  const popoverRef = useRef(null);
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+  }, []);
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -19,7 +23,7 @@ const BasePopover = ({
       }
     };
 
-    if (isOpen) {
+    if (isOpen && !isClosing) {
       setIsClosing(false);
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
@@ -31,7 +35,7 @@ const BasePopover = ({
         document.body.style.overflow = 'unset';
       }
     };
-  }, [isOpen, onClose, isClosing]);
+  }, [isOpen, isClosing, handleClose]);
 
   useEffect(() => {
     if (isClosing) {
@@ -45,15 +49,11 @@ const BasePopover = ({
     }
   }, [isClosing, onClose]);
 
-  const handleClose = () => {
-    setIsClosing(true);
-  };
-
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       handleClose();
     }
-  };
+  }, [handleClose]);
 
   if (!isOpen && !isClosing) return null;
 
@@ -78,7 +78,6 @@ const BasePopover = ({
       )}
 
       <div
-        ref={popoverRef}
         className={`relative w-full h-full md:w-full ${maxWidth} md:h-auto md:max-h-[85vh] bg-slate-900/70 border-0 md:border md:border-slate-700 rounded-none md:rounded-xl shadow-xl overflow-y-auto md:overflow-hidden md:flex md:flex-col pt-12 md:pt-0 ${
           isClosing ? 'animate-slideDown' : 'animate-slideUp'
         }`}
@@ -103,6 +102,11 @@ const BasePopover = ({
               <h2 className="text-lg font-semibold text-white mb-2">
                 {title}
               </h2>
+            )}
+            {headerContent && (
+              <div className="mt-2">
+                {headerContent}
+              </div>
             )}
           </div>
         </div>

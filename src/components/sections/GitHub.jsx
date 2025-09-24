@@ -4,7 +4,9 @@ import GitHubContributionMap from '../ui/GitHubContributionMap';
 const GitHub = () => {
   const githubUsername = 'hamedelfayome';
   const [repos, setRepos] = useState([]);
+  const [userStats, setUserStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [statsLoading, setStatsLoading] = useState(true);
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -30,7 +32,7 @@ const GitHub = () => {
   }, [githubUsername]);
 
   return (
-    <section id="github" className="py-12">
+    <section id="github" className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
       {/* Section Header */}
       <div className="mb-8">
         <h2 className="text-2xl font-semibold text-white mb-2">GitHub</h2>

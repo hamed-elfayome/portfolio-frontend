@@ -32,7 +32,9 @@ const GitHubContributionMap = ({ username, className = "" }) => {
         if (svg) {
           // Customize the SVG for our dark theme
           svg.setAttribute('width', '100%');
-          svg.setAttribute('height', '120');
+          svg.setAttribute('height', 'auto');
+          svg.setAttribute('viewBox', '0 0 728 112');
+          svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
           svg.style.background = 'transparent';
           
           // Style the rectangles for dark theme
@@ -66,8 +68,8 @@ const GitHubContributionMap = ({ username, className = "" }) => {
     const daysPerWeek = 7;
     const totalDays = weeks * daysPerWeek;
     
-    let svg = `<svg width="100%" height="120" style="background: transparent;">
-      <g transform="translate(10, 20)">`;
+    let svg = `<svg width="100%" height="auto" viewBox="0 0 728 112" preserveAspectRatio="xMinYMin meet" style="background: transparent;">
+      <g transform="translate(20, 20)">`;
     
     for (let week = 0; week < weeks; week++) {
       for (let day = 0; day < daysPerWeek; day++) {
@@ -135,9 +137,9 @@ const GitHubContributionMap = ({ username, className = "" }) => {
         <div className="text-xs text-slate-500 font-mono">365 days</div>
       </div>
       
-      <div className="bg-slate-900 rounded p-3 border border-slate-700 overflow-hidden">
-        <div 
-          className="contribution-map"
+      <div className="bg-slate-900 rounded p-2 md:p-3 border border-slate-700 overflow-x-auto overflow-y-hidden">
+        <div
+          className="contribution-map min-w-[680px] md:min-w-0"
           dangerouslySetInnerHTML={{ __html: contributions }}
         />
       </div>

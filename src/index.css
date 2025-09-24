@@ -113,3 +113,27 @@
     backdrop-filter: blur(0px);
   }
 }
+
+/* GitHub Contribution Map Styles */
+.contribution-map {
+  width: 100%;
+}
+
+.contribution-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure proper mobile scrolling for contribution map */
+@media (max-width: 768px) {
+  .contribution-map {
+    min-width: 680px;
+  }
+}
+
+@media (min-width: 768px) {
+  .contribution-map {
+    min-width: 0;
+  }
+}
