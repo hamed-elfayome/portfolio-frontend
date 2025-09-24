@@ -7,6 +7,7 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
   const [repoInfo, setRepoInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
   const popoverRef = useRef(null);
 
   useEffect(() => {
@@ -238,20 +239,39 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     };
 
     if (isOpen) {
+      setIsClosing(false);
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      if (!isOpen && !isClosing) {
+        document.body.style.overflow = 'unset';
+      }
     };
   }, [isOpen, onClose]);
+
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => {
+        onClose();
+        setIsClosing(false);
+        document.body.style.overflow = 'unset';
+      }, 300); // Match the animation duration
+
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing, onClose]);
+
+  const handleClose = () => {
+    setIsClosing(true);
+  };
 
   // Handle internal links and scroll anchors
   useEffect(() => {
@@ -354,7 +374,7 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      onClose();
+      handleClose();
     }
   };
 
@@ -366,16 +386,20 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
     });
   };
 
-  if (!isOpen) return null;
+  if (!isOpen && !isClosing) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 backdrop-blur-md animate-fadeIn"
+      className={`fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 ${
+        isClosing
+          ? 'animate-backdropFadeOut'
+          : 'animate-backdropFadeIn'
+      }`}
       onClick={handleBackdropClick}
     >
       {/* Mobile Fixed Back Button - Outside popover container */}
       <button
-        onClick={onClose}
+        onClick={handleClose}
         className="md:hidden fixed top-4 left-4 z-[60] w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800/90 backdrop-blur-sm rounded-full transition-colors border border-slate-700/50"
         aria-label="Back"
       >
@@ -383,17 +407,21 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
-      
+
       <div
         ref={popoverRef}
-        className="relative w-full h-full md:w-full md:max-w-3xl md:h-auto md:max-h-[85vh] bg-slate-900/70 border-0 md:border md:border-slate-700 rounded-none md:rounded-xl shadow-xl animate-slideUp overflow-y-auto md:overflow-hidden md:flex md:flex-col pt-12 md:pt-0"
+        className={`relative w-full h-full md:w-full md:max-w-3xl md:h-auto md:max-h-[85vh] bg-slate-900/70 border-0 md:border md:border-slate-700 rounded-none md:rounded-xl shadow-xl overflow-y-auto md:overflow-hidden md:flex md:flex-col pt-12 md:pt-0 ${
+          isClosing
+            ? 'animate-slideDown'
+            : 'animate-slideUp'
+        }`}
       >
         {/* Mobile/Desktop Header */}
         <div className="relative p-4 border-b border-slate-700 md:flex-shrink-0">
           
           {/* Desktop Close Button */}
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="hidden md:flex absolute top-3 right-3 w-8 h-8 items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors"
             aria-label="Close"
           >

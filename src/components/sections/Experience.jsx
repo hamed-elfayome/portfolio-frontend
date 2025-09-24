@@ -1,10 +1,22 @@
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { useState } from 'react';
 import experience from '../../data/experience.json';
+import ExperiencePopover from '../ui/ExperiencePopover';
 
 const Experience = () => {
   const [ref, isIntersecting] = useIntersectionObserver();
-  const [hoveredItem, setHoveredItem] = useState(null);
+  const [selectedExperience, setSelectedExperience] = useState(null);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const handleExperienceClick = (exp) => {
+    setSelectedExperience(exp);
+    setIsPopoverOpen(true);
+  };
+
+  const handleClosePopover = () => {
+    setIsPopoverOpen(false);
+    setSelectedExperience(null);
+  };
 
   return (
     <section 
@@ -19,10 +31,9 @@ const Experience = () => {
         <ol className="group/list">
           {experience.map((exp, index) => (
                    <li key={exp.id} className="mb-12">
-                     <div 
-                       className="group relative grid pb-1 transition-all sm:grid-cols-12 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
-                       onMouseEnter={() => setHoveredItem(exp.id)}
-                       onMouseLeave={() => setHoveredItem(null)}
+                     <div
+                       className="group relative grid pb-1 transition-all sm:grid-cols-12 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50 cursor-pointer"
+                       onClick={() => handleExperienceClick(exp)}
                      >
                 <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
                 <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-3" aria-label={exp.period}>
@@ -54,9 +65,12 @@ const Experience = () => {
                       )}
                     </div>
                   </h3>
-                         <p className="mt-2 text-sm leading-normal text-slate-400 transition-all duration-500 ease-in-out">
-                           {hoveredItem === exp.id ? exp.description : exp.summary}
+                         <p className="mt-2 text-sm leading-normal text-slate-400">
+                           {exp.summary}
                          </p>
+                         <div className="mt-2 text-sm text-slate-400">
+                           Click to view full experience details →
+                         </div>
                   <ul className="mt-2 flex flex-wrap" aria-label="Technologies used">
                     {exp.technologies.map((tech, techIndex) => (
                       <li key={techIndex} className="mr-1.5 mt-2">
@@ -72,6 +86,13 @@ const Experience = () => {
           ))}
         </ol>
       </div>
+
+      {/* Experience Details Popover */}
+      <ExperiencePopover
+        experience={selectedExperience}
+        isOpen={isPopoverOpen}
+        onClose={handleClosePopover}
+      />
     </section>
   );
 };

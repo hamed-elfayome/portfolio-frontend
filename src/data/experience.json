@@ -5,8 +5,14 @@
     "position": "Software Engineer",
     "period": "July 2025 — Present",
     "summary": "Developing comprehensive Shopify Cash on Delivery app using Laravel + React SPA. Improved navigation speed by 90% and delivered large-scale features in 2-day cycles.",
-    "description": "Developing comprehensive Shopify Cash on Delivery app using Laravel + React SPA architecture. Restructured application improving navigation speed by 90%. Delivered multi-layer features across complete Shopify ecosystem. Built high-performance microservices including native PHP short-link redirect service. Leveraged AI-powered development (Cursor + MCPs) for enhanced productivity. Delivered large-scale features (2,500+ lines per feature) with 2-day cycles.",
-    "technologies": ["Laravel", "React SPA", "PHP Microservices", "MySQL", "Shopify APIs", "GraphQL", "AI Tools"],
+    "details": "Developing a Shopify app (Laravel + React) for a Cash on Delivery (COD) solution, including backend, frontend, and extension layers.\n\nAdapted to React with zero prior experience, restructured the app into a Single Page Application (SPA) using Context API and shared request handling, improving performance and reducing navigation speed by 90%.\n\nDelivered complex multi-layer features across the full Shopify ecosystem, including:\n- Backend: services, GraphQL, actions, jobs, and middlewares\n- Theme App Extension: secure code injection into storefronts\n- Function Extension: Shopify serverless functions\n- Admin Interface: React-based dashboard\n- Microservices: e.g., high-performance short-link redirect service in native PHP\n\nOwned the entire development lifecycle end-to-end, from architecture to deployment, often releasing features within 2 days despite requiring comprehensive three-tier architecture.\n\nDelivered large-scale features (e.g., 2,500+ lines of code per feature) with full testing and production readiness.\n\nLeveraged AI agentic tools (Cursor) combined with matched MCPs (Model Context Protocols) to significantly improve AI performance, ensuring higher-quality code generation while reducing development time.\n\nMixed human-led architecture with AI-powered implementation, guaranteeing scalability, maintainability, and performance in production environments.",
+    "achievements": [
+      "Improved navigation speed by 90% through React SPA restructuring",
+      "Delivered large-scale features (2,500+ lines) in 2-day cycles",
+      "Built comprehensive multi-layer Shopify ecosystem features",
+      "Leveraged AI tools (Cursor + MCPs) for enhanced development productivity"
+    ],
+    "technologies": ["Laravel", "React SPA", "Context API", "PHP", "MySQL", "Shopify Admin API", "Theme Extensions", "Function Extensions", "GraphQL", "Jobs/Services/Middleware", "AI Tools", "Cursor", "MCPs"],
     "companyUrl": "#",
     "logo": null
   },
@@ -16,8 +22,15 @@
     "position": "Full-Stack Engineer",
     "period": "June 2024 — June 2025",
     "summary": "Delivered 10+ digital solutions, reduced delivery time by 95%, and designed infrastructure serving 10,000+ students. Cut server costs by 80% while improving performance.",
-    "description": "Delivered 10+ end-to-end digital solutions accelerating organizational transformation. Reduced project delivery time by 95% (discussion to production in 2 days). Built Placement Test System serving multiple departments. Designed infrastructure serving 10,000+ students worldwide. Migrated server infrastructure reducing costs by 80% ($200→$40/month). Improved system performance by 35% while cutting costs. Created automated deployment pipeline with zero-touch deployments. Implemented automated backup system (8TB) with one-click restore.",
-    "technologies": ["Laravel", "Vue.js", "React", "Next.js SSR", "PHP", "MySQL", "GitHub Actions", "Python", "Hetzner VPS"],
+    "details": "Worked directly with stakeholders to translate business needs into software solutions, coordinating with an outsourced partner to ensure releases aligned with company objectives.\n\nDelivered 10+ end-to-end digital solutions (e.g., online certificates, placement test, online calendar), accelerating digital transformation across the organization.\n\nReduced delivery time significantly — some projects moved from discussion to production in just 2 days.\n\nPlacement Test System: Collected requirements from multiple departments (sales, teaching, finance, admin) and built a platform with multi-role functionality to manage placement tests efficiently.\n\nInfrastructure & DevOps Optimization:\n- AI-Powered Adaptability: Entered DevOps with zero prior experience and, by leveraging LLMs, independently designed and delivered production-grade infrastructure serving 10,000+ students worldwide\n- Server Migration & Cost Savings: Migrated from cPanel-based hosting to Hetzner VPS, reducing costs from $200 → $40/month while improving performance by 35%\n- Scalable Architecture: Created standardized server environment snapshots, cutting VPS provisioning from hours to 2 minutes\n- Deployment Automation: Built end-to-end automation (Laravel, Vue, React, Next.js with SSR) with GitHub Actions + custom scripts, enabling deployments in 15 minutes with zero human interaction with the server\n- Backup & Recovery: Implemented an automated Python-based backup system (8TB server), supporting Bunny Storage/VPS targets, one-click restore, and daily Telegram reporting at just $20/month",
+    "achievements": [
+      "Reduced infrastructure costs by 80% while improving performance by 35%",
+      "Accelerated project delivery cycles by up to 95%",
+      "Supported 10,000+ active students worldwide through scalable infrastructure",
+      "Cut VPS provisioning time from hours to 2 minutes",
+      "Built automated deployment pipeline with 15-minute zero-touch deployments"
+    ],
+    "technologies": ["Laravel", "Vue.js", "React", "Next.js SSR", "PHP", "MySQL", "GitHub Actions", "Python", "Hetzner VPS", "Telegram Bot API", "Bunny Storage", "DevOps", "LLMs"],
     "companyUrl": "#",
     "logo": null
   },
@@ -27,8 +40,14 @@
     "position": "Backend Developer",
     "period": "Oct 2024 — Feb 2025",
     "summary": "Developed backend and admin dashboard for white-label platform with reservations, loyalty programs, and e-commerce functionality.",
-    "description": "Developed backend and admin dashboard for white-label platform. Integrated reservations, loyalty programs, and e-commerce functionality. Managed full project lifecycle from requirements to deployment. Collaborated with design teams ensuring product consistency.",
-    "technologies": ["Laravel", "MySQL", "RESTful APIs", "Admin Dashboards", "Figma Integration"],
+    "details": "Developed and maintained the backend and admin dashboard for a white-label platform tailored for businesses such as clinics, combining reservations, loyalty programs, and small e-commerce functionality.\n\nResponsible for full project customization and delivery, ensuring solutions met unique client business needs.\n\nCollaborated directly with clients — from requirements gathering and feature planning to deployment — ensuring end-to-end alignment with expectations.\n\nReviewed Figma designs and coordinated with app implementation teams to maintain consistency and quality across the product lifecycle.",
+    "achievements": [
+      "Built customizable white-label platform for multiple business types",
+      "Managed full project lifecycle from requirements to deployment",
+      "Ensured design consistency through Figma collaboration",
+      "Delivered tailored solutions for diverse client business needs"
+    ],
+    "technologies": ["PHP", "Laravel", "MySQL", "Admin Dashboards", "API Development", "Figma Collaboration", "White-label Solutions"],
     "companyUrl": "#",
     "logo": null
   }
