@@ -100,33 +100,11 @@ const GitHubContributionMap = ({ username, className = "" }) => {
   }
 
   return (
-    <div className={`bg-slate-800 rounded-lg p-4 border border-slate-700 ${className}`}>
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="text-sm font-medium text-slate-200">Activity</span>
-        </div>
-        <div className="text-xs text-slate-500 font-mono">365 days</div>
-      </div>
-      
-      <div className="bg-slate-900 rounded p-2 md:p-3 border border-slate-700 overflow-x-auto overflow-y-hidden">
-        <div
-          className="contribution-map min-w-[680px] md:min-w-0"
-          dangerouslySetInnerHTML={{ __html: contributions }}
-        />
-      </div>
-      
-      <div className="flex items-center justify-between mt-3 text-xs text-slate-400">
-        <span>Less</span>
-        <div className="flex items-center gap-1">
-          <div className="w-3 h-3 bg-slate-700 rounded-sm border border-slate-600"></div>
-          <div className="w-3 h-3 bg-slate-800 rounded-sm border border-slate-600"></div>
-          <div className="w-3 h-3 bg-emerald-800 rounded-sm border border-slate-600"></div>
-          <div className="w-3 h-3 bg-emerald-700 rounded-sm border border-slate-600"></div>
-          <div className="w-3 h-3 bg-emerald-600 rounded-sm border border-slate-600"></div>
-        </div>
-        <span>More</span>
-      </div>
+    <div className="overflow-x-auto overflow-y-hidden">
+      <div
+        className="contribution-map min-w-[680px] md:min-w-0"
+        dangerouslySetInnerHTML={{ __html: contributions }}
+      />
     </div>
   );
 };
