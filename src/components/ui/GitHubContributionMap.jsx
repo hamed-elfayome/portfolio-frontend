@@ -9,49 +9,22 @@ const GitHubContributionMap = ({ username, className = "" }) => {
     const fetchContributions = async () => {
       try {
         setLoading(true);
-        // Using GitHub's contribution graph API with CORS proxy
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        const targetUrl = `https://github.com/users/${username}/contributions`;
-        
-        const response = await fetch(proxyUrl + targetUrl, {
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-          }
-        });
-        
-        if (!response.ok) {
+
+        // Try to fetch using GitHub's embed approach
+        const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
+
+        if (response.ok) {
+          const data = await response.json();
+
+          // Create SVG from API data
+          const contributionsSVG = createContributionsSVG(data);
+          setContributions(contributionsSVG);
+        } else {
           throw new Error('Failed to fetch contributions');
         }
-        
-        const html = await response.text();
-        // Parse the SVG from the response
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const svg = doc.querySelector('svg');
-        
-        if (svg) {
-          // Customize the SVG for our dark theme
-          svg.setAttribute('width', '100%');
-          svg.setAttribute('height', 'auto');
-          svg.setAttribute('viewBox', '0 0 728 112');
-          svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
-          svg.style.background = 'transparent';
-          
-          // Style the rectangles for dark theme
-          const rects = svg.querySelectorAll('rect');
-          rects.forEach(rect => {
-            rect.style.stroke = '#374151';
-            rect.style.strokeWidth = '1';
-          });
-          
-          setContributions(svg.outerHTML);
-        } else {
-          throw new Error('No contribution data found');
-        }
       } catch (err) {
-        console.warn('GitHub API failed, using fallback:', err.message);
-        // Fallback: Create a mock contribution map
-        setContributions(createMockContributions());
+        console.warn('GitHub contributions API failed:', err.message);
+        setError('Unable to load contribution data');
       } finally {
         setLoading(false);
       }
@@ -62,33 +35,32 @@ const GitHubContributionMap = ({ username, className = "" }) => {
     }
   }, [username]);
 
-  const createMockContributions = () => {
-    // Create a simple mock contribution map
-    const weeks = 53;
-    const daysPerWeek = 7;
-    const totalDays = weeks * daysPerWeek;
-    
-    let svg = `<svg width="100%" height="auto" viewBox="0 0 728 112" preserveAspectRatio="xMinYMin meet" style="background: transparent;">
-      <g transform="translate(20, 20)">`;
-    
-    for (let week = 0; week < weeks; week++) {
-      for (let day = 0; day < daysPerWeek; day++) {
-        const dayIndex = week * daysPerWeek + day;
-        const intensity = Math.random() * 4; // 0-4 intensity levels
-        const x = week * 13;
-        const y = day * 13;
-        
-        let color = '#1e293b'; // slate-800
-        if (intensity > 0) color = '#0f172a'; // slate-900
-        if (intensity > 1) color = '#065f46'; // emerald-800
-        if (intensity > 2) color = '#047857'; // emerald-700
-        if (intensity > 3) color = '#059669'; // emerald-600
-        
-        svg += `<rect width="10" height="10" x="${x}" y="${y}" fill="${color}" 
-                stroke="#374151" stroke-width="1" rx="2"/>`;
-      }
-    }
-    
+  const createContributionsSVG = (data) => {
+    const contributions = data.contributions;
+    const weeks = Math.ceil(contributions.length / 7);
+
+    let svg = `<svg width="100%" height="auto" viewBox="0 0 ${weeks * 13 + 20} 112" preserveAspectRatio="xMinYMin meet" style="background: transparent;">
+      <g transform="translate(10, 20)">`;
+
+    contributions.forEach((contribution, index) => {
+      const week = Math.floor(index / 7);
+      const day = index % 7;
+      const x = week * 13;
+      const y = day * 13;
+
+      // Map contribution count to color intensity
+      let color = '#0f172a'; // No contributions
+      if (contribution.count > 0) color = '#0d4d3c'; // 1+ contributions
+      if (contribution.count >= 2) color = '#065f46'; // 2+ contributions
+      if (contribution.count >= 4) color = '#047857'; // 4+ contributions
+      if (contribution.count >= 6) color = '#059669'; // 6+ contributions
+      if (contribution.count >= 10) color = '#10b981'; // 10+ contributions
+
+      svg += `<rect width="10" height="10" x="${x}" y="${y}" fill="${color}"
+              stroke="#374151" stroke-width="1" rx="2"
+              data-count="${contribution.count}" data-date="${contribution.date}"/>`;
+    });
+
     svg += `</g></svg>`;
     return svg;
   };
