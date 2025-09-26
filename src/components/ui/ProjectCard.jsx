@@ -53,29 +53,75 @@ const ProjectCard = ({ project }) => {
     }
   };
 
-  return (
-      <div className="project-card sm:order-1 sm:col-span-2 sm:translate-y-1">
-        <div className="project-card-header">
-        {project.card.type && (
-          <div className="project-type-badge">
-            {project.card.type}
+  const getVisualization = () => {
+    const visuals = {
+      'server': (
+        <div className="space-y-2 w-full">
+          <div className="flex gap-1.5 justify-center">
+            <div className="w-8 h-1.5 bg-teal-400 rounded-full opacity-70"></div>
+            <div className="w-4 h-1.5 bg-teal-300 rounded-full opacity-50"></div>
           </div>
-        )}
-        <div className="project-icon">
-          {renderIcon(project.card.icon)}
+          <div className="flex gap-1.5 justify-center">
+            <div className="w-6 h-1.5 bg-teal-400 rounded-full opacity-60"></div>
+            <div className="w-6 h-1.5 bg-teal-300 rounded-full opacity-40"></div>
+          </div>
+          <div className="flex gap-1.5 justify-center">
+            <div className="w-9 h-1.5 bg-teal-400 rounded-full opacity-80"></div>
+            <div className="w-3 h-1.5 bg-teal-300 rounded-full opacity-30"></div>
+          </div>
+        </div>
+      ),
+      'database': (
+        <div className="space-y-1.5 flex flex-col items-center">
+          <div className="w-12 h-2.5 bg-teal-400 rounded-full opacity-80"></div>
+          <div className="w-10 h-2.5 bg-teal-300 rounded-full opacity-65"></div>
+          <div className="w-11 h-2.5 bg-teal-400 rounded-full opacity-50"></div>
+          <div className="w-9 h-2.5 bg-teal-300 rounded-full opacity-35"></div>
+        </div>
+      ),
+      'api': (
+        <div className="grid grid-cols-3 gap-2 p-1">
+          <div className="w-3 h-3 bg-teal-400 rounded opacity-80"></div>
+          <div className="w-3 h-3 bg-slate-500 rounded opacity-60"></div>
+          <div className="w-3 h-3 bg-teal-300 rounded opacity-70"></div>
+          <div className="w-3 h-3 bg-slate-600 rounded opacity-50"></div>
+          <div className="w-3 h-3 bg-teal-400 rounded opacity-90"></div>
+          <div className="w-3 h-3 bg-slate-500 rounded opacity-65"></div>
+          <div className="w-3 h-3 bg-teal-300 rounded opacity-60"></div>
+          <div className="w-3 h-3 bg-slate-600 rounded opacity-40"></div>
+          <div className="w-3 h-3 bg-teal-400 rounded opacity-75"></div>
+        </div>
+      ),
+      'analysis': (
+        <div className="flex items-end justify-center gap-1.5 h-12 px-1">
+          <div className="w-2 h-4 bg-teal-300 rounded-t opacity-60"></div>
+          <div className="w-2 h-7 bg-teal-400 rounded-t opacity-80"></div>
+          <div className="w-2 h-10 bg-teal-400 rounded-t opacity-90"></div>
+          <div className="w-2 h-6 bg-teal-300 rounded-t opacity-70"></div>
+          <div className="w-2 h-8 bg-teal-400 rounded-t opacity-85"></div>
+        </div>
+      ),
+      'robot': (
+        <div className="flex flex-col items-center space-y-1.5">
+          <div className="w-10 h-6 border-2 border-teal-400 rounded-lg bg-teal-400 bg-opacity-10"></div>
+          <div className="flex justify-center gap-2.5">
+            <div className="w-1.5 h-1.5 bg-teal-400 rounded-full opacity-90"></div>
+            <div className="w-1.5 h-1.5 bg-teal-400 rounded-full opacity-90"></div>
+          </div>
+          <div className="w-8 h-2.5 bg-teal-300 rounded-full opacity-70"></div>
+        </div>
+      )
+    };
+    return visuals[project.card.icon] || visuals['api'];
+  };
+
+  return (
+    <div className="hidden sm:block sm:order-1 sm:col-span-2 sm:translate-y-1">
+      <div className="aspect-square w-28 bg-slate-800 bg-opacity-20 border border-slate-700 border-opacity-40 rounded-xl p-4 transition-all duration-300 group-hover:border-teal-400 group-hover:border-opacity-50 group-hover:bg-slate-800 group-hover:bg-opacity-30">
+        <div className="h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          {getVisualization()}
         </div>
       </div>
-      
-      <div className="project-content">
-        <h3 className="project-title">
-          {project.card.title}
-        </h3>
-        <p className="project-tech">
-          {project.card.tech}
-        </p>
-      </div>
-      
-      <div className="project-accent"></div>
     </div>
   );
 };
