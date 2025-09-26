@@ -20,8 +20,6 @@ const ScrollIndicator = () => {
   // Copy the exact sidebar approach
   const handleNavClick = (href) => {
     const sectionId = href.substring(1);
-    console.log('ScrollIndicator calling scrollToSection with:', sectionId);
-    console.log('scrollToSection function:', scrollToSection);
     scrollToSection(sectionId);
   };
 

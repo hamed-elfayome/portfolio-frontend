@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # Traefik Reverse Proxy with Let's Encrypt
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      # Enable Docker provider
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+
+      # Configure entrypoints
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+
+      # Enable Let's Encrypt
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+
+      # Global redirect to HTTPS
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+
+      # Enable API and dashboard (optional)
+      - --api.dashboard=true
+      - --api.insecure=false
+
+      # Logging
+      - --log.level=INFO
+      - --accesslog=true
+
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - web
+    labels:
+      # Dashboard
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.dashboard.tls=true"
+      - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      # Basic auth for dashboard (admin:secure123)
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$$2y$$10$$8zFwOAW2iObBOSo8rNvj1eWmzOLhI8hKNHOeLfhBF8X7PGUuoIDu6"
+
+  # Portfolio Application
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: portfolio-app
+    restart: unless-stopped
+    networks:
+      - web
+    environment:
+      - NODE_ENV=production
+    labels:
+      - "traefik.enable=true"
+      # Main domain
+      - "traefik.http.routers.portfolio.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.portfolio.tls=true"
+      - "traefik.http.routers.portfolio.tls.certresolver=letsencrypt"
+      # www redirect
+      - "traefik.http.routers.portfolio-www.rule=Host(`www.${DOMAIN}`)"
+      - "traefik.http.routers.portfolio-www.tls=true"
+      - "traefik.http.routers.portfolio-www.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.portfolio-www.middlewares=www-redirect"
+      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.(.*)"
+      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://$${1}"
+      - "traefik.http.middlewares.www-redirect.redirectregex.permanent=true"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  web:
+    driver: bridge
