@@ -62,7 +62,7 @@ const Projects = () => {
                   <ul className="mt-2 flex flex-wrap" aria-label="Technologies used:">
                     {project.technologies.map((tech, techIndex) => (
                       <li key={techIndex} className="mr-1.5 mt-2">
-                        <div className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300">
+                        <div className="relative px-1.5 py-0.5 text-[10px] font-medium leading-5 text-teal-300 bg-teal-400/5 border border-teal-400/20 rounded-md backdrop-blur-sm transition-all duration-300 group-hover:border-teal-400/15 group-hover:bg-teal-400/10">
                           {tech}
                         </div>
                       </li>
