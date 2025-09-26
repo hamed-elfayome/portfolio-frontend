@@ -46,7 +46,7 @@ const ExperiencePopover = ({ experience, isOpen, onClose }) => {
           <span className="text-sm font-medium text-slate-200">Experience Details</span>
         </div>
         <div className="prose prose-invert prose-sm max-w-none">
-          <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+          <p className="text-slate-300 text-xs whitespace-pre-line">
             {experience.details}
           </p>
         </div>
@@ -61,8 +61,8 @@ const ExperiencePopover = ({ experience, isOpen, onClose }) => {
           </div>
           <ul className="space-y-2">
             {experience.achievements.map((achievement, index) => (
-              <li key={index} className="text-slate-300 text-sm flex items-start gap-2">
-                <span className="text-green-400 mt-1">•</span>
+              <li key={index} className="text-slate-300 text-xs flex items-start gap-2">
+                <span className="text-green-400">•</span>
                 <span>{achievement}</span>
               </li>
             ))}
@@ -94,7 +94,7 @@ const ExperiencePopover = ({ experience, isOpen, onClose }) => {
       isOpen={isOpen}
       onClose={onClose}
       title={renderPopoverHeader()}
-      maxWidth="md:max-w-3xl"
+      maxWidth="md:max-w-4xl"
     >
       <div className="p-4">
         {renderContent()}

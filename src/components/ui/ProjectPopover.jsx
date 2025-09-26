@@ -171,13 +171,44 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
     }
   };
 
+  const renderProjectTitle = () => (
+      <div className="flex flex-wrap gap-4 items-center justify-between">
+        <h3>
+          {project.title}
+        </h3>
+        {/* GitHub Repository Link */}
+        {project.githubUrl && project.githubUrl !== '#' && (
+          <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 transition-colors text-sm font-medium"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd"></path>
+            </svg>
+            View Repository
+          </a>
+        )}
+      </div>
+  )
+
   const renderProjectHeader = () => (
     <>
+      {/* Project Description */}
       <p className="text-slate-300 text-sm leading-relaxed mb-3">
         {project.description}
       </p>
 
-      <div className="flex flex-wrap gap-1.5">
+      {/*/!* Repository Description (if different from project description) *!/*/}
+      {/*{repoInfo && repoInfo.description && repoInfo.description !== project.description && (*/}
+      {/*  <p className="text-slate-400 text-xs leading-relaxed mb-3 italic">*/}
+      {/*    Repository: {repoInfo.description}*/}
+      {/*  </p>*/}
+      {/*)}*/}
+
+      {/* Technologies */}
+      <div className="flex flex-wrap gap-1.5 mb-3">
         {project.technologies.map((tech, index) => (
           <span
             key={index}
@@ -213,78 +244,29 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
       );
     }
 
+    // Only show README content in body
+    if (readmeContent) {
+      return (
+        <div className="bg-slate-700/30 rounded p-4 overflow-y-auto">
+          <div
+            className="readme-content max-w-none prose prose-invert prose-sm"
+            dangerouslySetInnerHTML={{ __html: readmeContent }}
+          />
+        </div>
+      );
+    }
+
+    // If no README, show message
     return (
-      <div className="space-y-4">
-        {/* README Content */}
-        {readmeContent && (
-          <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-teal-400 rounded-full"></div>
-              <span className="text-sm font-medium text-slate-200">Documentation</span>
-            </div>
-            <div className="bg-slate-900 rounded p-3 max-h-80 md:max-h-64 overflow-y-auto border border-slate-700">
-              <div
-                className="readme-content max-w-none prose prose-invert prose-sm"
-                dangerouslySetInnerHTML={{ __html: readmeContent }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Repository Info */}
-        {repoInfo && (repoInfo.description || repoInfo.topics?.length > 0) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {repoInfo.description && (
-              <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  <span className="text-sm font-medium text-slate-200">Repository</span>
-                </div>
-                <p className="text-slate-300 text-sm">{repoInfo.description}</p>
-              </div>
-            )}
-
-            {repoInfo.topics && repoInfo.topics.length > 0 && (
-              <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  <span className="text-sm font-medium text-slate-200">Topics</span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {repoInfo.topics.slice(0, 6).map((topic, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-slate-700 text-slate-300 text-xs rounded border border-slate-600"
-                    >
-                      #{topic}
-                    </span>
-                  ))}
-                  {repoInfo.topics.length > 6 && (
-                    <span className="px-2 py-1 bg-slate-700 text-slate-400 text-xs rounded border border-slate-600">
-                      +{repoInfo.topics.length - 6}
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Action Links */}
-        <div className="flex items-center justify-center gap-3 pt-2 pb-4">
-          {project.githubUrl && project.githubUrl !== '#' && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-600 hover:border-slate-500 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd"></path>
-              </svg>
-              <span className="text-sm font-medium">View Code</span>
-            </a>
-          )}
+      <div className="text-center py-8">
+        <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-slate-800 flex items-center justify-center">
+          <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <p className="text-slate-400 text-sm">No documentation available</p>
+        {/* Action Links for projects without README */}
+        <div className="flex items-center justify-center gap-3 mt-6">
           {project.liveUrl && project.liveUrl !== '#' && (
             <a
               href={project.liveUrl}
@@ -309,7 +291,7 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
     <BasePopover
       isOpen={isOpen}
       onClose={onClose}
-      title={project.title}
+      title={renderProjectTitle()}
       headerContent={renderProjectHeader()}
       maxWidth="md:max-w-3xl"
     >
