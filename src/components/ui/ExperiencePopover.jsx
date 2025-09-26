@@ -6,10 +6,15 @@ const ExperiencePopover = ({ experience, isOpen, onClose }) => {
 
   const renderPopoverHeader = () => (
     <>
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-teal-300 font-medium">
-          {experience.company}
-        </p>
+      <div className="flex flex-wrap gap-4 items-center justify-between mb-3">
+        <div className="flex flex-wrap gap-2">
+          <h2 className="text-lg font-semibold text-white">
+            {experience.position}
+          </h2>
+          <p className="text-teal-300 font-medium">
+            {experience.company}
+          </p>
+        </div>
         <span className="text-xs text-slate-400 font-mono">
           {experience.period}
         </span>
@@ -88,8 +93,7 @@ const ExperiencePopover = ({ experience, isOpen, onClose }) => {
     <BasePopover
       isOpen={isOpen}
       onClose={onClose}
-      title={experience.position}
-      headerContent={renderPopoverHeader()}
+      title={renderPopoverHeader()}
       maxWidth="md:max-w-3xl"
     >
       <div className="p-4">
