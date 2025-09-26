@@ -191,7 +191,7 @@
 }
 
 .readme-content ol {
-  list-style-type: decimal;
+  list-style-type: disc;
   list-style-position: outside;
 }
 
@@ -210,7 +210,7 @@
 }
 
 .readme-content ol li::marker {
-  @apply text-teal-400 font-medium;
+  @apply text-teal-400;
 }
 
 /* Nested lists - Compact */
