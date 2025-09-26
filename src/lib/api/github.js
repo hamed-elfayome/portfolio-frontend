@@ -136,8 +136,19 @@ export const fetchGitHubReadme = async (githubUrl, readmePath = 'README.md') => 
       throw new Error('README content not found');
     }
 
-    // Decode base64 content
-    const readmeContent = atob(data.content.replace(/\s/g, ''));
+    // Decode base64 content with proper UTF-8 handling for emojis
+    const base64Content = data.content.replace(/\s/g, '');
+
+    // Convert base64 to Uint8Array, then decode as UTF-8
+    const binaryString = atob(base64Content);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    // Use TextDecoder for proper UTF-8 decoding (handles emojis correctly)
+    const decoder = new TextDecoder('utf-8');
+    const readmeContent = decoder.decode(bytes);
 
     // Cache the result
     cache.set(cacheKey, {

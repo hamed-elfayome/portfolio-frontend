@@ -247,7 +247,7 @@ const ProjectPopover = ({ project, isOpen, onClose }) => {
     // Only show README content in body
     if (readmeContent) {
       return (
-        <div className="bg-slate-700/30 rounded p-4 overflow-y-auto">
+        <div className="bg-slate-700/30 rounded px-4 overflow-y-auto">
           <div
             className="readme-content max-w-none prose prose-invert prose-sm"
             dangerouslySetInnerHTML={{ __html: readmeContent }}

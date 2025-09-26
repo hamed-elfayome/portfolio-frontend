@@ -21,14 +21,14 @@ export const removeEmojis = (text) => {
 };
 
 /**
- * Escape HTML entities in text
+ * Escape HTML entities in text while preserving emojis
  * @param {string} text - Text to escape
- * @returns {string} - Escaped HTML
+ * @returns {string} - Escaped HTML with preserved emojis
  */
 const escapeHtml = (text) => {
   if (!text) return '';
-  
-  // Simple HTML escaping that preserves emojis
+
+  // HTML escaping that preserves Unicode characters including emojis
   return text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -65,7 +65,7 @@ export const generateAnchorId = (text) => {
  * @returns {string} - Processed HTML
  */
 export const processInlineMarkdown = (text) => {
-  return removeEmojis(text)
+  return text
     
     // Images (before links to avoid conflicts)
     .replace(MARKDOWN_PATTERNS.INLINE.IMAGE,
