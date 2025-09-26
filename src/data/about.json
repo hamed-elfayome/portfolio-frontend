@@ -1,16 +1,20 @@
 {
   "paragraphs": [
     {
-      "text": "I'm a passionate Software Engineer who loves turning complex problems into elegant solutions. I've helped companies reduce costs by 80%, deliver projects 95% faster, and build systems that serve thousands of users worldwide.",
-      "highlightedWords": ["Software Engineer", "elegant solutions"]
+      "text": "Hi, I'm Hamed! I'm someone who gets genuinely excited about solving problems that others might find overwhelming. There's something deeply satisfying about taking a complex business challenge and breaking it down into clean, efficient code that just works.",
+      "highlightedWords": ["solving problems", "complex business challenge"]
     },
     {
-      "text": "Right now, I'm building amazing Shopify applications using modern web technologies. I use AI tools to work smarter, not harder, and I can build big features in just 2 days.",
-      "highlightedWords": ["AI tools"]
+      "text": "What I love most about software engineering is that every project is a puzzle. Whether I'm diving into a new technology I've never used before or figuring out how to make systems talk to each other, I approach each challenge with curiosity and persistence. I believe the best solutions come from really understanding the problem first.",
+      "highlightedWords": ["every project is a puzzle", "curiosity and persistence"]
     },
     {
-      "text": "I work with Laravel, React, Vue.js, Python, and Node.js. I also handle DevOps, automation, and AI integration. My goal is always to create solutions that make a real difference for businesses.",
-      "highlightedWords": ["Laravel", "Python", "DevOps", "AI integration"]
+      "text": "I'm fascinated by how AI is transforming the way we build software. Rather than replacing human creativity, I see it as amplifying our ability to focus on what really matters—the strategic thinking, the user experience, and the business impact. I love experimenting with new tools and finding ways to work smarter.",
+      "highlightedWords": ["AI is transforming", "work smarter"]
+    },
+    {
+      "text": "When I'm not coding, you'll probably find me exploring the latest tech trends, contributing to open source, or mentoring fellow developers. I believe in continuous learning and sharing knowledge—after all, the best code is the one that helps others grow too.",
+      "highlightedWords": ["continuous learning", "sharing knowledge"]
     }
   ]
 }

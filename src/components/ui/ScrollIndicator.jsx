@@ -24,7 +24,14 @@ const ScrollIndicator = () => {
   };
 
   const scrollToPrev = () => {
-    handleNavClick('#about');
+    if (currentSection <= 0) {
+      // If on first section, scroll to very top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Otherwise scroll to previous section
+      const prevSectionId = sectionIds[currentSection - 1];
+      scrollToSection(prevSectionId);
+    }
   };
 
   // Always show the indicator

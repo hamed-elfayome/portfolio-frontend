@@ -19,8 +19,8 @@ const Experience = () => {
   };
 
   return (
-    <section 
-      id="experience" 
+    <section
+      id="experience"
       ref={ref}
       className="snap-section"
       aria-label="Work experience"
@@ -28,9 +28,14 @@ const Experience = () => {
       <div className={`w-full max-w-4xl mx-auto transition-all duration-1000 delay-400 ${
         isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
+        {/* Mobile Section Title */}
+        <div className="lg:hidden mb-8">
+          <h2 className="text-2xl font-bold text-slate-200 mb-2">Experience</h2>
+          <p className="text-slate-400 text-sm">Professional journey and key achievements</p>
+        </div>
         <ol className="group/list">
           {experience.map((exp, index) => (
-                   <li key={exp.id} className="mb-12">
+                   <li key={exp.id} className={`${index === experience.length - 1 ? 'mb-0' : 'mb-12'}`}>
                      <div
                        className="group relative grid pb-1 transition-all sm:grid-cols-12 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50 cursor-pointer"
                        onClick={() => handleExperienceClick(exp)}

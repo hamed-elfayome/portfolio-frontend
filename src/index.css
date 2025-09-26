@@ -26,15 +26,15 @@
 
 
 @layer components {
-  /* Sections with responsive behavior */
+  /* Sections with unified mobile spacing */
   .snap-section {
-    padding-block: 2rem;
+    padding-block: 3rem;
     overflow-y: visible;
   }
 
   @media (min-width: 768px) {
     .snap-section {
-      padding-block: 3rem;
+      padding-block: 4rem;
     }
   }
 

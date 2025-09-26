@@ -20,8 +20,8 @@ const Projects = () => {
   };
 
   return (
-    <section 
-      id="projects" 
+    <section
+      id="projects"
       ref={ref}
       className="snap-section"
       aria-label="Selected projects"
@@ -29,9 +29,14 @@ const Projects = () => {
       <div className={`w-full max-w-4xl mx-auto transition-all duration-1000 delay-600 ${
         isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
+        {/* Mobile Section Title */}
+        <div className="lg:hidden mb-8">
+          <h2 className="text-2xl font-bold text-slate-200 mb-2">Projects</h2>
+          <p className="text-slate-400 text-sm">Selected work and personal projects</p>
+        </div>
         <ul className="group/list">
           {projects.map((project, index) => (
-            <li key={project.id} className="mb-12">
+            <li key={project.id} className={`${index === projects.length - 1 ? 'mb-0' : 'mb-12'}`}>
               <div
                 className="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50 cursor-pointer"
                 onClick={() => handleProjectClick(project)}
