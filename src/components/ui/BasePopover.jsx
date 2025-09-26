@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import usePopoverHistory from '../../hooks/usePopoverHistory';
 
 const BasePopover = ({
   isOpen,
@@ -8,13 +9,17 @@ const BasePopover = ({
   children,
   maxWidth = "md:max-w-3xl",
   showBackButton = true,
-  showCloseButton = true
+  showCloseButton = true,
+  useHistory = true
 }) => {
   const [isClosing, setIsClosing] = useState(false);
 
   const handleClose = useCallback(() => {
     setIsClosing(true);
   }, []);
+
+  // Enable browser back button to close popover
+  usePopoverHistory(isOpen, handleClose, useHistory);
 
   useEffect(() => {
     const handleEscape = (e) => {
