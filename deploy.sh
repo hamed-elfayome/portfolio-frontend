@@ -40,7 +40,7 @@ if command -v htpasswd >/dev/null 2>&1; then
     TRAEFIK_AUTH_HASH=$(htpasswd -nb "$TRAEFIK_AUTH_USER" "$TRAEFIK_AUTH_PASSWORD")
 else
     echo -e "${GREEN}   Using Docker htpasswd...${NC}"
-    TRAEFIK_AUTH_HASH=$(docker run --rm --entrypoint htpasswd registry:2 -nb "$TRAEFIK_AUTH_USER" "$TRAEFIK_AUTH_PASSWORD")
+    TRAEFIK_AUTH_HASH=$(docker run --rm httpd:2.4-alpine htpasswd -nb "$TRAEFIK_AUTH_USER" "$TRAEFIK_AUTH_PASSWORD")
 fi
 
 # Escape for docker-compose (double the $ signs)
