@@ -49,8 +49,8 @@ services:
       - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.middlewares=auth"
-      # Basic auth for dashboard (admin:secure123)
-      - "traefik.http.middlewares.auth.basicauth.users=admin:$$2y$$10$$8zFwOAW2iObBOSo8rNvj1eWmzOLhI8hKNHOeLfhBF8X7PGUuoIDu6"
+      # Basic auth for dashboard - auto-generated hash from deploy script
+      - "traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_AUTH_HASH_ESCAPED}"
 
   # Portfolio Application
   portfolio:
