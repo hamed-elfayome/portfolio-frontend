@@ -59,7 +59,7 @@ const ProjectCard = ({ project }) => {
         <div className="relative h-full flex flex-col">
           {/* Type label at top */}
           <div className="flex justify-center mb-1">
-            <span className="text-[7px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
+            <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
           {/* Server visualization */}
           <div className="flex-1 flex flex-col justify-center space-y-2">
@@ -82,7 +82,7 @@ const ProjectCard = ({ project }) => {
         <div className="relative h-full flex flex-col">
           {/* Type label at top */}
           <div className="flex justify-center mb-1">
-            <span className="text-[7px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
+            <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
           {/* Database visualization */}
           <div className="flex-1 flex flex-col items-center justify-center space-y-1.5">
@@ -97,7 +97,7 @@ const ProjectCard = ({ project }) => {
         <div className="relative h-full flex flex-col">
           {/* Type label at top */}
           <div className="flex justify-center mb-1">
-            <span className="text-[7px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
+            <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
           {/* API grid */}
           <div className="flex-1 flex items-center justify-center">
@@ -119,7 +119,7 @@ const ProjectCard = ({ project }) => {
         <div className="relative h-full flex flex-col">
           {/* Type label at top */}
           <div className="flex justify-center mb-1">
-            <span className="text-[7px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
+            <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
           {/* Analysis visualization */}
           <div className="flex-1 flex items-end justify-center gap-1.5 px-1">
@@ -135,7 +135,7 @@ const ProjectCard = ({ project }) => {
         <div className="relative h-full flex flex-col">
           {/* Type label at top */}
           <div className="flex justify-center mb-1">
-            <span className="text-[7px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
+            <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
           {/* Simple robot visualization */}
           <div className="flex-1 flex flex-col justify-center items-center space-y-2">

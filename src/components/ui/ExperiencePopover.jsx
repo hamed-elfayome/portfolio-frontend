@@ -7,13 +7,23 @@ const ExperiencePopover = ({ experience, isOpen, onClose }) => {
   const renderPopoverHeader = () => (
     <>
       <div className="flex flex-wrap gap-4 items-center justify-between mb-3">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <h2 className="text-lg font-semibold text-white">
             {experience.position}
           </h2>
           <p className="text-teal-300 font-medium">
             {experience.company}
           </p>
+          {/* Job Type Tag - Inline with title */}
+          {experience.jobType && (
+            <span className={`px-2 h-5 flex flex-wrap content-center text-[10px] font-medium rounded-md ${
+              experience.jobType === 'Full-time'
+                ? 'text-teal-400/90 bg-teal-400/10'
+                : 'text-amber-400/90 bg-amber-400/10'
+            }`}>
+              {experience.jobType}
+            </span>
+          )}
         </div>
         <span className="text-xs text-slate-400 font-mono">
           {experience.period}

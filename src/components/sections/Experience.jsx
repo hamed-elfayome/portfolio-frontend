@@ -46,6 +46,7 @@ const Experience = () => {
                 </header>
                 <div className="z-10 sm:col-span-9">
                   <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap justify-start gap-y-4 gap-x-2 items-center">
                     <div className="relative">
                       <h3 className="font-medium leading-snug mb-1 text-slate-200">
                         <div>
@@ -76,11 +77,25 @@ const Experience = () => {
                         <div className="h-full bg-teal-400 transition-all duration-500 ease-out group-hover:w-full w-0"></div>
                       </div>
                     </div>
-                    <span className="text-xs text-slate-500 group-hover:text-teal-400 transition-colors">more</span>
+                    {/* Job Type Tag - Integrated with header */}
+                    {exp.jobType && (
+                        <span className={`px-1.5 py-0.5 h-fit text-[10px] font-medium rounded transition-colors ${
+                            exp.jobType === 'Full-time'
+                                ? 'text-teal-400/80 bg-teal-400/5 group-hover:bg-teal-400/10'
+                                : 'text-amber-400/80 bg-amber-400/5 group-hover:bg-amber-400/10'
+                        }`}>
+                        {exp.jobType}
+                      </span>
+                    )}
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 text-slate-500 group-hover:text-teal-400 group-hover:scale-110 transition-all duration-300">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                    </svg>
                   </div>
-                         <p className="mt-2 text-sm leading-normal text-slate-400">
-                           {exp.summary}
-                         </p>
+
+                  <p className="mt-2 text-sm leading-normal text-slate-400">
+                    {exp.summary}
+                  </p>
                   <ul className="mt-2 flex flex-wrap" aria-label="Technologies used">
                     {exp.technologies.map((tech, techIndex) => (
                       <li key={techIndex} className="mr-1.5 mt-2">
