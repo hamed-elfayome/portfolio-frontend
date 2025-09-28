@@ -1,5 +1,81 @@
 import React from 'react';
 
+const animations = `
+  @keyframes serverload {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+  @keyframes serverled {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  @keyframes dataflow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.03); }
+  }
+  @keyframes flowline {
+    0%, 100% { opacity: 0.4; transform: scaleX(1); }
+    50% { opacity: 0.7; transform: scaleX(1.05); }
+  }
+  @keyframes chartgrow {
+    0% { transform: scaleY(0.8); opacity: 0.7; }
+    50% { transform: scaleY(1.02); opacity: 1; }
+    100% { transform: scaleY(1); opacity: 0.9; }
+  }
+  @keyframes grid {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+  }
+  @keyframes indicator {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  @keyframes metric {
+    0%, 100% { opacity: 0.5; transform: scaleX(1); }
+    50% { opacity: 0.8; transform: scaleX(1.05); }
+  }
+  @keyframes automation {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    33% { opacity: 0.8; transform: scale(1.02); }
+    66% { opacity: 0.9; transform: scale(1.01); }
+  }
+  @keyframes autoflow {
+    0%, 100% { opacity: 0.4; transform: scaleX(1); }
+    50% { opacity: 0.8; transform: scaleX(1.1); }
+  }
+  @keyframes autoprocess {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+  @keyframes autoprogress {
+    0% { opacity: 0.4; }
+    25% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+    75% { opacity: 0.6; }
+    100% { opacity: 0.4; }
+  }
+  @keyframes autostatus {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.05); }
+  }
+  @keyframes globe {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.02); }
+  }
+  @keyframes latitude {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+  }
+  @keyframes longitude {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+  }
+  @keyframes webapp {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+`;
+
 const ProjectCard = ({ project }) => {
   const renderIcon = (iconType) => {
     switch (iconType) {
@@ -57,97 +133,161 @@ const ProjectCard = ({ project }) => {
     const visuals = {
       'server': (
         <div className="relative h-full flex flex-col">
-          {/* Type label at top */}
-          <div className="flex justify-center mb-1">
+          <div className="flex justify-center mb-2">
             <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
-          {/* Server visualization */}
-          <div className="flex-1 flex flex-col justify-center space-y-2">
-            <div className="flex gap-1.5 justify-center">
-              <div className="w-8 h-1.5 bg-teal-400 rounded-full opacity-70"></div>
-              <div className="w-4 h-1.5 bg-teal-300 rounded-full opacity-50"></div>
-            </div>
-            <div className="flex gap-1.5 justify-center">
-              <div className="w-6 h-1.5 bg-teal-400 rounded-full opacity-60"></div>
-              <div className="w-6 h-1.5 bg-teal-300 rounded-full opacity-40"></div>
-            </div>
-            <div className="flex gap-1.5 justify-center">
-              <div className="w-9 h-1.5 bg-teal-400 rounded-full opacity-80"></div>
-              <div className="w-3 h-1.5 bg-teal-300 rounded-full opacity-30"></div>
+          <div className="flex-1 flex items-center justify-center">
+            <div className="relative w-14 h-10 bg-slate-800/20 border border-teal-400/30 rounded">
+              <div className="absolute inset-1 flex flex-col justify-between">
+                <div className="h-1.5 bg-teal-400/40 border border-teal-400/60 rounded-sm relative overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-teal-400/20 to-teal-400/5 animate-[serverload_4s_ease-in-out_infinite]"></div>
+                  <div className="absolute right-0.5 top-0.5 w-1 h-0.5 bg-green-400 rounded-full animate-[serverled_3s_ease-in-out_infinite]"></div>
+                </div>
+                <div className="h-1.5 bg-teal-400/50 border border-teal-400/70 rounded-sm relative overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-teal-400/25 to-teal-400/8 animate-[serverload_4s_ease-in-out_infinite_1s]"></div>
+                  <div className="absolute right-0.5 top-0.5 w-1 h-0.5 bg-teal-400 rounded-full animate-[serverled_2.5s_ease-in-out_infinite]"></div>
+                </div>
+                <div className="h-1.5 bg-teal-400/30 border border-teal-400/50 rounded-sm relative">
+                  <div className="absolute right-0.5 top-0.5 w-1 h-0.5 bg-slate-500 rounded-full"></div>
+                </div>
+                <div className="h-1.5 bg-teal-400/40 border border-teal-400/60 rounded-sm relative overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-teal-400/20 to-teal-400/5 animate-[serverload_4s_ease-in-out_infinite_2s]"></div>
+                  <div className="absolute right-0.5 top-0.5 w-1 h-0.5 bg-green-400 rounded-full animate-[serverled_3.5s_ease-in-out_infinite]"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       ),
       'database': (
         <div className="relative h-full flex flex-col">
-          {/* Type label at top */}
-          <div className="flex justify-center mb-1">
+          <div className="flex justify-center mb-2">
             <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
-          {/* Database visualization */}
-          <div className="flex-1 flex flex-col items-center justify-center space-y-1.5">
-            <div className="w-12 h-2.5 bg-teal-400 rounded-full opacity-80"></div>
-            <div className="w-10 h-2.5 bg-teal-300 rounded-full opacity-65"></div>
-            <div className="w-11 h-2.5 bg-teal-400 rounded-full opacity-50"></div>
-            <div className="w-9 h-2.5 bg-teal-300 rounded-full opacity-35"></div>
+          <div className="flex-1 flex items-center justify-center">
+            <div className="relative w-14 h-10">
+              <div className="absolute inset-0 border border-teal-400/30 rounded-lg bg-slate-800/20">
+                <div className="absolute top-1 left-1 grid grid-cols-4 gap-0.5">
+                  <div className="w-1.5 h-1.5 bg-teal-400/60 rounded-sm animate-[dataflow_4s_ease-in-out_infinite]"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-300/40 rounded-sm"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-400/70 rounded-sm animate-[dataflow_4s_ease-in-out_infinite_1s]"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-300/50 rounded-sm"></div>
+                </div>
+                <div className="absolute top-3 left-1 grid grid-cols-4 gap-0.5">
+                  <div className="w-1.5 h-1.5 bg-teal-300/50 rounded-sm"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-400/80 rounded-sm animate-[dataflow_4s_ease-in-out_infinite_2s]"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-300/40 rounded-sm animate-[dataflow_4s_ease-in-out_infinite_0.5s]"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-400/60 rounded-sm"></div>
+                </div>
+                <div className="absolute top-5 left-1 grid grid-cols-4 gap-0.5">
+                  <div className="w-1.5 h-1.5 bg-teal-400/50 rounded-sm"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-300/60 rounded-sm animate-[dataflow_4s_ease-in-out_infinite_1.5s]"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-400/40 rounded-sm"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-300/70 rounded-sm animate-[dataflow_4s_ease-in-out_infinite_3s]"></div>
+                </div>
+                <div className="absolute top-2 right-1 flex flex-col gap-1">
+                  <div className="w-2 h-0.5 bg-teal-400/60 rounded-full animate-[flowline_2s_ease-in-out_infinite]"></div>
+                  <div className="w-1.5 h-0.5 bg-teal-300/50 rounded-full animate-[flowline_2s_ease-in-out_infinite_0.7s]"></div>
+                  <div className="w-2 h-0.5 bg-teal-400/40 rounded-full animate-[flowline_2s_ease-in-out_infinite_1.3s]"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       ),
       'api': (
         <div className="relative h-full flex flex-col">
-          {/* Type label at top */}
-          <div className="flex justify-center mb-1">
+          <div className="flex justify-center mb-2">
             <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
-          {/* API grid */}
           <div className="flex-1 flex items-center justify-center">
-            <div className="grid grid-cols-3 gap-1.5">
-              <div className="w-2.5 h-2.5 bg-teal-400 rounded opacity-80"></div>
-              <div className="w-2.5 h-2.5 bg-slate-500 rounded opacity-60"></div>
-              <div className="w-2.5 h-2.5 bg-teal-300 rounded opacity-70"></div>
-              <div className="w-2.5 h-2.5 bg-slate-600 rounded opacity-50"></div>
-              <div className="w-2.5 h-2.5 bg-teal-400 rounded opacity-90"></div>
-              <div className="w-2.5 h-2.5 bg-slate-500 rounded opacity-65"></div>
-              <div className="w-2.5 h-2.5 bg-teal-300 rounded opacity-60"></div>
-              <div className="w-2.5 h-2.5 bg-slate-600 rounded opacity-40"></div>
-              <div className="w-2.5 h-2.5 bg-teal-400 rounded opacity-75"></div>
+            <div className="relative w-14 h-10">
+              {/* Central API hub */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-teal-400/70 border-2 border-teal-400/40 rounded-full">
+                <div className="absolute inset-0.5 bg-teal-400 rounded-full"></div>
+              </div>
+
+              {/* API endpoints - circles around center */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-teal-300/60 border border-teal-300/80 rounded-full"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-teal-300/60 border border-teal-300/80 rounded-full"></div>
+              <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-2 h-2 bg-teal-300/60 border border-teal-300/80 rounded-full"></div>
+              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-2 h-2 bg-teal-300/60 border border-teal-300/80 rounded-full"></div>
+
+              {/* Connection lines */}
+              <div className="absolute top-2 left-1/2 w-px h-3 bg-teal-400/50 transform -translate-x-1/2"></div>
+              <div className="absolute bottom-2 left-1/2 w-px h-3 bg-teal-400/50 transform -translate-x-1/2"></div>
+              <div className="absolute top-1/2 left-2 w-3 h-px bg-teal-400/50 transform -translate-y-1/2"></div>
+              <div className="absolute top-1/2 right-2 w-3 h-px bg-teal-400/50 transform -translate-y-1/2"></div>
             </div>
           </div>
         </div>
       ),
       'analysis': (
         <div className="relative h-full flex flex-col">
-          {/* Type label at top */}
-          <div className="flex justify-center mb-1">
+          <div className="flex justify-center mb-2">
             <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
-          {/* Analysis visualization */}
-          <div className="flex-1 flex items-end justify-center gap-1.5 px-1">
-            <div className="w-2 h-4 bg-teal-300 rounded-t opacity-60"></div>
-            <div className="w-2 h-7 bg-teal-400 rounded-t opacity-80"></div>
-            <div className="w-2 h-10 bg-teal-400 rounded-t opacity-90"></div>
-            <div className="w-2 h-6 bg-teal-300 rounded-t opacity-70"></div>
-            <div className="w-2 h-8 bg-teal-400 rounded-t opacity-85"></div>
+          <div className="flex-1 flex flex-col justify-center space-y-2">
+            <div className="relative h-6 bg-slate-800/30 rounded border border-slate-700/40 overflow-hidden">
+              <div className="absolute bottom-0 left-1 w-1 bg-gradient-to-t from-teal-400 to-teal-300 rounded-t animate-[chartgrow_3s_ease-out_infinite]" style={{height: '60%'}}></div>
+              <div className="absolute bottom-0 left-3 w-1 bg-gradient-to-t from-teal-400 to-teal-300 rounded-t animate-[chartgrow_3s_ease-out_infinite_0.2s]" style={{height: '80%'}}></div>
+              <div className="absolute bottom-0 left-5 w-1 bg-gradient-to-t from-teal-400 to-teal-300 rounded-t animate-[chartgrow_3s_ease-out_infinite_0.4s]" style={{height: '45%'}}></div>
+              <div className="absolute bottom-0 left-7 w-1 bg-gradient-to-t from-teal-400 to-teal-300 rounded-t animate-[chartgrow_3s_ease-out_infinite_0.6s]" style={{height: '90%'}}></div>
+              <div className="absolute bottom-0 left-9 w-1 bg-gradient-to-t from-teal-400 to-teal-300 rounded-t animate-[chartgrow_3s_ease-out_infinite_0.8s]" style={{height: '70%'}}></div>
+              <div className="absolute inset-x-0 top-1/4 h-px bg-slate-600/40 animate-[grid_4s_ease-in-out_infinite]"></div>
+              <div className="absolute inset-x-0 top-1/2 h-px bg-slate-600/40 animate-[grid_4s_ease-in-out_infinite_0.5s]"></div>
+              <div className="absolute inset-x-0 top-3/4 h-px bg-slate-600/40 animate-[grid_4s_ease-in-out_infinite_1s]"></div>
+              <div className="absolute top-1 right-1 w-1 h-1 bg-green-400 rounded-full animate-[indicator_1s_ease-in-out_infinite]"></div>
+            </div>
+            <div className="flex justify-center gap-1">
+              <div className="w-1.5 h-0.5 bg-teal-400/60 rounded-full animate-[metric_2s_ease-in-out_infinite]"></div>
+              <div className="w-1.5 h-0.5 bg-teal-300/40 rounded-full animate-[metric_2s_ease-in-out_infinite_0.3s]"></div>
+              <div className="w-1.5 h-0.5 bg-teal-400/80 rounded-full animate-[metric_2s_ease-in-out_infinite_0.6s]"></div>
+            </div>
           </div>
         </div>
       ),
       'robot': (
         <div className="relative h-full flex flex-col">
-          {/* Type label at top */}
-          <div className="flex justify-center mb-1">
+          <div className="flex justify-center mb-2">
             <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
           </div>
-          {/* Simple robot visualization */}
-          <div className="flex-1 flex flex-col justify-center items-center space-y-2">
-            {/* Robot head */}
-            <div className="w-8 h-5 border border-teal-400 rounded bg-teal-400 bg-opacity-15"></div>
-            {/* Robot eyes */}
-            <div className="flex justify-center gap-2">
-              <div className="w-1 h-1 bg-teal-400 rounded-full opacity-80"></div>
-              <div className="w-1 h-1 bg-teal-400 rounded-full opacity-80"></div>
+          <div className="flex-1 flex flex-col justify-center space-y-2">
+            <div className="flex items-center justify-center gap-1">
+              <div className="w-2 h-2 bg-slate-600/60 rounded border border-slate-500/40 animate-[automation_5s_ease-in-out_infinite]"></div>
+              <div className="w-2 h-px bg-teal-400/60 animate-[autoflow_3s_ease-in-out_infinite]"></div>
+              <div className="relative w-3 h-3 bg-teal-400/20 rounded border border-teal-400/40">
+                <div className="absolute inset-1 bg-teal-400 rounded animate-[autoprocess_2s_ease-in-out_infinite]"></div>
+              </div>
+              <div className="w-2 h-px bg-teal-400/60 animate-[autoflow_3s_ease-in-out_infinite_1.5s]"></div>
+              <div className="w-2 h-2 bg-teal-300/80 rounded border border-teal-300/60 animate-[automation_5s_ease-in-out_infinite_2.5s]"></div>
             </div>
-            {/* Robot body */}
-            <div className="w-6 h-4 bg-teal-300 rounded opacity-60"></div>
+            <div className="flex justify-center gap-1">
+              <div className="w-4 h-0.5 bg-gradient-to-r from-slate-600/40 to-teal-400/60 rounded-full animate-[autoprogress_4s_ease-in-out_infinite]"></div>
+            </div>
+            <div className="flex justify-center gap-0.5">
+              <div className="w-1 h-1 bg-green-400/60 rounded-full animate-[autostatus_3s_ease-in-out_infinite]"></div>
+              <div className="w-1 h-1 bg-teal-400/80 rounded-full animate-[autostatus_3s_ease-in-out_infinite_1s]"></div>
+              <div className="w-1 h-1 bg-slate-500/40 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      ),
+      'globe': (
+        <div className="relative h-full flex flex-col">
+          <div className="flex justify-center mb-2">
+            <span className="text-[9px] font-mono text-teal-400 opacity-80">{project.card.type}</span>
+          </div>
+          <div className="flex-1 flex items-center justify-center">
+            <div className="relative w-8 h-8">
+              <div className="absolute inset-0 border-2 border-teal-400/40 rounded-full bg-teal-400/10">
+                <div className="absolute inset-1 border border-teal-400/60 rounded-full animate-[globe_4s_ease-in-out_infinite]"></div>
+                <div className="absolute top-1/2 left-0 right-0 h-px bg-teal-400/50 animate-[latitude_3s_ease-in-out_infinite]"></div>
+                <div className="absolute top-0 bottom-0 left-1/2 w-px bg-teal-400/50 animate-[longitude_3s_ease-in-out_infinite_1s]"></div>
+                <div className="absolute top-2 left-2 w-1 h-1 bg-teal-300/80 rounded-full animate-[webapp_2s_ease-in-out_infinite]"></div>
+                <div className="absolute bottom-2 right-2 w-1 h-1 bg-teal-400/90 rounded-full animate-[webapp_2s_ease-in-out_infinite_0.7s]"></div>
+              </div>
+            </div>
           </div>
         </div>
       )
@@ -156,13 +296,16 @@ const ProjectCard = ({ project }) => {
   };
 
   return (
-    <div className="hidden sm:block sm:order-1 sm:col-span-2 sm:translate-y-1">
-      <div className="aspect-square w-28 bg-slate-800 bg-opacity-20 border border-slate-700 border-opacity-40 rounded-xl p-4 transition-all duration-300 group-hover:border-teal-400 group-hover:border-opacity-50 group-hover:bg-slate-800 group-hover:bg-opacity-30">
-        <div className="h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-          {getVisualization()}
+    <>
+      <style dangerouslySetInnerHTML={{ __html: animations }} />
+      <div className="hidden sm:block sm:order-1 sm:col-span-2 sm:translate-y-1">
+        <div className="aspect-square w-28 bg-slate-800 bg-opacity-20 border border-slate-700 border-opacity-40 rounded-xl p-4 transition-all duration-300 group-hover:border-teal-400 group-hover:border-opacity-50 group-hover:bg-slate-800 group-hover:bg-opacity-30">
+          <div className="h-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            {getVisualization()}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
